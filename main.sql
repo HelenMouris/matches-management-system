@@ -210,10 +210,10 @@ insert into SportsAssociationManager VALUES (@username, @name);
 GO
 
 CREATE PROCEDURE addNewMatch
-@first_club_name varchar(20),
-@second_club_name varchar(20),
-@host_name varchar(20),
-@match_time datetime
+@hostclub varchar(20),
+@guestclub varchar(20),
+@starttime datetime,
+@endtime datetime
 
 AS
 BEGIN
@@ -222,16 +222,16 @@ DECLARE @ID2 int
 DECLARE @idhost int
 DECLARE @idguest int
 
-select @id1 = id from club where name = @first_club_name
-select @id2 = id from club where name = @second_club_name
-select @idhost = id from club where name = @host_name
+select @id1 = id from club where name = @hostclub
+select @id2 = id from club where name = @guestclub
+select @idhost = id from club where name = @hostclub
 
 if @id1 = @idhost
 	set @idguest = @id2
 else
 	set @idguest = @id1
 
-insert into match (StartTime, HostClub, GuestClub) values (@match_time, @idhost, @idguest);
+insert into match (StartTime, EndTime ,HostClub, GuestClub) values (@starttime , @endtime, @idhost, @idguest);
 END;
 GO
 
