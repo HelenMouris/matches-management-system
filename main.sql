@@ -217,19 +217,12 @@ CREATE PROCEDURE addNewMatch
 
 AS
 BEGIN
-DECLARE @ID1 int
-DECLARE @ID2 int
 DECLARE @idhost int
 DECLARE @idguest int
 
-select @id1 = id from club where name = @hostclub
-select @id2 = id from club where name = @guestclub
 select @idhost = id from club where name = @hostclub
+select @idguest = id from club where name = @guestclub
 
-if @id1 = @idhost
-	set @idguest = @id2
-else
-	set @idguest = @id1
 
 insert into match (StartTime, EndTime ,HostClub, GuestClub) values (@starttime , @endtime, @idhost, @idguest);
 END;
@@ -241,27 +234,20 @@ Select Name from Club EXCEPT ((select c.name from Match m INNER JOIN Club c ON m
 go
 
 CREATE PROCEDURE deleteMatch 
-
-@first_club_name varchar(20),
-@second_club_name varchar(20),
-@host_name varchar(20)
+@hostclub varchar(20),
+@guestclub varchar(20)
 AS
 BEGIN
-DECLARE @ID1 int
-DECLARE @ID2 int
 DECLARE @idhost int
 DECLARE @idguest int
+DECLARE @matchid int
 
-set @id1 = (select id from club where name = @first_club_name)
-set @id2 = (select id from club where name = @second_club_name)
-set @idhost = (select id from club where name = @host_name)
-
-if @id1 = @idhost
-	set @idguest = @id2
-else
-	set @idguest = @id1
+set @idhost = (select id from club where name = @hostclub)
+set @idguest = (select id from club where name = @guestclub)
+set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
 
 delete from match where HostClub = @idhost AND guestClub = @idguest;
+delete from Ticket where Match = @matchid
 END
 Go
 
