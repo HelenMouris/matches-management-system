@@ -6,7 +6,7 @@ password varchar(20),
 Primary Key(username)
 
 )
-
+--HELLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 create table Stadium(
 ID int IDENTITY,
 Name varchar(20),
