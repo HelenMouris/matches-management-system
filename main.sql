@@ -143,38 +143,38 @@ GO
 
 CREATE VIEW allAssocManagers
 AS 
-SELECT username , name 
-FROM SportsAssociationManager 
+SELECT sm.username ,su.password,  sm.name 
+FROM SportsAssociationManager sm INNER JOIN SystemUser su ON sm.username = su.username
 GO
 
 CREATE VIEW allClubRepresentatives 
 AS
-SELECT cr.username , cr.Name , c.Name AS Club
-FROM ClubRepresentative cr INNER JOIN Club c ON cr.Club = c.ID 
+SELECT cr.username, su.password , cr.Name , c.Name AS Club
+FROM ClubRepresentative cr INNER JOIN Club c ON cr.Club = c.ID INNER JOIN SystemUser su ON cr.username = su.username
 GO
 
 CREATE VIEW allStadiumManagers
 AS 
-SELECT sm.username , sm.Name , s.Name AS Stadium
-FROM StadiumManager sm INNER JOIN Stadium s ON sm.Stadium = s.ID
+SELECT sm.username ,su.password, sm.Name , s.Name AS Stadium
+FROM StadiumManager sm INNER JOIN Stadium s ON sm.Stadium = s.ID INNER JOIN SystemUser su ON sm.username = su.username
 GO
 
 CREATE VIEW allFans	
 AS
-SELECT name , NationalID , BirthDate , Status
-FROM Fan
+SELECT f.username , su.password, f.name , f.NationalID , f.BirthDate , f.Status 
+FROM Fan f INNER JOIN SystemUser su ON f.username = su.username
 GO
 
 CREATE VIEW allMatches
 AS
-SELECT HostClub AS Club1 , GuestClub AS Club2 , HostClub , StartTime
+SELECT HostClub , GuestClub , StartTime
 FROM Match
 GO
 
 
 CREATE VIEW allTickets
 AS
-SELECT m.HostClub AS Club1 , m.GuestClub AS Club2 , s.Name as Stadium , StartTime
+SELECT m.HostClub , m.GuestClub , s.Name as Stadium , StartTime
 FROM Ticket t INNER JOIN Match m ON T.Match = m.ID INNER JOIN Stadium s ON m.Stadium = s.ID
 GO
 
@@ -195,7 +195,7 @@ GO
 
 CREATE VIEW allRequests
 AS 
-SELECT cr.Name AS ClubRepresentative , sm.Name AS StadiumManager , hr.Status
+SELECT cr.username AS ClubRepresentative , sm.username AS StadiumManager , hr.Status
 FROM HostRequest hr INNER JOIN ClubRepresentative cr ON hr.ClubRepresentative = cr.ID
 INNER JOIN StadiumManager sm ON sm.ID = hr.StadiumManager 
 GO
