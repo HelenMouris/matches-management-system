@@ -47,7 +47,7 @@ Foreign Key(Club) references Club(ID)	 on DELETE NO ACTION  on UPDATE NO ACTION
 
 create table Fan(
 username varchar(20),
-NationalID int,
+NationalID varchar(20),
 Phone int,
 Name varchar(20),
 Address varchar(20),
@@ -406,7 +406,7 @@ RETURN ( SELECT cr.Name as ClubRepresentative, c.Name as GuestClub, m.StartTime 
 GO
 
 CREATE PROCEDURE acceptRequest
-@stadiumManagerName varchar(20),
+@stadiumManagerUserName varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
@@ -419,7 +419,7 @@ set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub 
 				inner join Club as gc on m.GuestClub = gc.ID
 				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'accepted' where Match_ID = @matchID 
-AND StadiumManager = (SELECT id FROM StadiumManager where Name = @stadiumManagerName)
+AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 set @capacity = (select s.Capacity from Match m INNER JOIN Stadium s ON m.Stadium = s.ID where m.ID = @matchID)
 WHILE @i <= @capacity 
 	BEGIN
@@ -430,7 +430,7 @@ end
 GO
 
 CREATE PROCEDURE rejectRequest
-@stadiumManagerName varchar(20),
+@stadiumManagerUserName varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
@@ -441,18 +441,19 @@ set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub 
 				inner join Club as gc on m.GuestClub = gc.ID
 				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'rejected' where Match_ID = @matchID 
-AND StadiumManager = (SELECT id FROM StadiumManager where Name = @stadiumManagerName)
+AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 end
 GO
 	
 CREATE PROCEDURE addFan
 @name varchar(20),
-@nationalId int,
+@username varchar(20),
+@password varchar(20),
+@nationalId varchar(20),
 @birthDate datetime,
 @address varchar(20),
-@phone int,
-@username varchar(20),
-@password varchar(20)
+@phone int
+
 AS
 insert into SystemUser Values (@username, @password)
 insert into Fan(Name, NationalID, BirthDate, Address, Phone) VALUES (@name, @nationalId, @birthDate, @address, @phone)
@@ -480,7 +481,7 @@ RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as
 GO
 
 CREATE PROCEDURE purchaseTicket
-@nationalId int,
+@nationalId varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
@@ -544,7 +545,3 @@ RETURN (select m.HostClub , m.GuestClub , count(*) as count , Rank() over(order 
 go
 
 
-
-/* CREATE FUNCTION [matchesRankedByAttendance](@stadiumname varchar(20) , @clubname varchar(20))
-RETURNS TABLE
-AS */
