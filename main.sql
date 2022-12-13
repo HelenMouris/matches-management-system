@@ -245,7 +245,7 @@ DECLARE @matchid int
 set @idhost = (select id from club where name = @hostclub)
 set @idguest = (select id from club where name = @guestclub)
 set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
-
+	
 delete from match where HostClub = @idhost AND guestClub = @idguest;
 delete from Ticket where Match = @matchid
 END
@@ -259,6 +259,7 @@ begin
 DECLARE @stid int
 set @stid =(select id from Stadium where name = @stadium_name)
 delete from Match where Stadium = @stid AND StartTime > CURRENT_TIMESTAMP
+-- should this also delete tickets?
 END
 Go
 
@@ -291,7 +292,10 @@ GO
 create procedure deleteClub
 @clubname varchar(20)
 AS
+DECLARE @clubid int
+set @clubid = (select id from Club where name = @clubname)
 delete from club where name = @clubname
+delete from Match where HostClub = @clubid OR GuestClub = @clubid
 GO
 
 create procedure addStadium
@@ -310,6 +314,7 @@ DECLARE @stadiumId int
 set @stadiumId = (select id from Stadium where Name = @Name)
 delete from Match where Stadium = @stadiumId
 delete from Stadium where Name = @name 
+--should this also delete tickets?
 end
 Go
 
