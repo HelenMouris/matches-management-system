@@ -558,16 +558,19 @@ WHERE t.Status = 0 group by m.HostClub , m.GuestClub order by attendancerank)
 go***/
 
 CREATE FUNCTION matchesRankedByAttendance()
-RETURNS @res table (hostClub varchar(20), guestClub varchar(20), count int,countrank int )
+RETURNS @res table (hostClub varchar(20), guestClub varchar(20))
 AS
 begin
-
-insert into @res 
+DECLARE @temp table (hostClub varchar(20), guestClub varchar(20), count int,countrank int )
+insert into @temp 
 select hc.Name as HostName , gc.Name as GuestName, count() as count, Rank() over (ORDER BY count() DESC) as countrank from Ticket t 
 INNER JOIN Match m ON t.Match = m.ID
 INNER JOIN Club hc on m.HostClub = hc.ID
 INNER JOIN Club gc on m.GuestClub = gc.ID
 WHERE t.Status = 0 group by hc.Name , gc.Name order by countrank desc
+
+insert into @res 
+select hostClub , guestClub from @temp
 
 return
 end
