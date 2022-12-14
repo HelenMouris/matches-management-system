@@ -549,13 +549,6 @@ INNER JOIN Club gc on m.GuestClub = gc.ID
 WHERE t.Status = 0 group by hc.Name , gc.Name order by count(*) DESC)
 go
 
-/***CREATE FUNCTION matchesRankedByAttendance()
-RETURNS TABLE
-AS
-RETURN (select m.HostClub , m.GuestClub , count(*) as count , Rank() over(order by count desc) as attendancerank from Ticket t 
-INNER JOIN Match m ON t.Match = m.ID 
-WHERE t.Status = 0 group by m.HostClub , m.GuestClub order by attendancerank)
-go***/
 
 CREATE FUNCTION matchesRankedByAttendance()
 RETURNS @res table (hostClub varchar(20), guestClub varchar(20))
@@ -563,7 +556,7 @@ AS
 begin
 DECLARE @temp table (hostClub varchar(20), guestClub varchar(20), count int,countrank int )
 insert into @temp 
-select hc.Name as HostName , gc.Name as GuestName, count() as count, Rank() over (ORDER BY count() DESC) as countrank from Ticket t 
+select hc.Name as HostName , gc.Name as GuestName, count(*) as count, Rank() over (ORDER BY count(*) DESC) as countrank from Ticket t 
 INNER JOIN Match m ON t.Match = m.ID
 INNER JOIN Club hc on m.HostClub = hc.ID
 INNER JOIN Club gc on m.GuestClub = gc.ID
@@ -574,8 +567,8 @@ select hostClub , guestClub from @temp
 
 return
 end
-
 go
+
 CREATE FUNCTION requestsFromClub(@stadiumname varchar(20) , @clubname varchar(20))
 RETURNS @res table (hostClub varchar(20), guestClub varchar(20))
 AS
@@ -593,3 +586,4 @@ inner join Club gc on gc.ID = m.GuestClub
 where c.Name = @clubname and h.StadiumManager = @smId and h.Status = 'unhandled'
 return
 end
+go
