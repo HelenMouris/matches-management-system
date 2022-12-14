@@ -47,7 +47,7 @@ Foreign Key(Club) references Club(ID)	 on DELETE NO ACTION  on UPDATE NO ACTION
 
 create table Fan(
 username varchar(20),
-NationalID int,
+NationalID varchar(20),
 Phone int,
 Name varchar(20),
 Address varchar(20),
@@ -143,38 +143,38 @@ GO
 
 CREATE VIEW allAssocManagers
 AS 
-SELECT username , name 
-FROM SportsAssociationManager 
+SELECT sm.username ,su.password,  sm.name 
+FROM SportsAssociationManager sm INNER JOIN SystemUser su ON sm.username = su.username
 GO
 
 CREATE VIEW allClubRepresentatives 
 AS
-SELECT cr.username , cr.Name , c.Name AS Club
-FROM ClubRepresentative cr INNER JOIN Club c ON cr.Club = c.ID 
+SELECT cr.username, su.password , cr.Name , c.Name AS Club
+FROM ClubRepresentative cr INNER JOIN Club c ON cr.Club = c.ID INNER JOIN SystemUser su ON cr.username = su.username
 GO
 
 CREATE VIEW allStadiumManagers
 AS 
-SELECT sm.username , sm.Name , s.Name AS Stadium
-FROM StadiumManager sm INNER JOIN Stadium s ON sm.Stadium = s.ID
+SELECT sm.username ,su.password, sm.Name , s.Name AS Stadium
+FROM StadiumManager sm INNER JOIN Stadium s ON sm.Stadium = s.ID INNER JOIN SystemUser su ON sm.username = su.username
 GO
 
 CREATE VIEW allFans	
 AS
-SELECT name , NationalID , BirthDate , Status
-FROM Fan
+SELECT f.username , su.password, f.name , f.NationalID , f.BirthDate , f.Status 
+FROM Fan f INNER JOIN SystemUser su ON f.username = su.username
 GO
 
 CREATE VIEW allMatches
 AS
-SELECT HostClub AS Club1 , GuestClub AS Club2 , HostClub , StartTime
+SELECT HostClub , GuestClub , StartTime
 FROM Match
 GO
 
 
 CREATE VIEW allTickets
 AS
-SELECT m.HostClub AS Club1 , m.GuestClub AS Club2 , s.Name as Stadium , StartTime
+SELECT m.HostClub , m.GuestClub , s.Name as Stadium , StartTime
 FROM Ticket t INNER JOIN Match m ON T.Match = m.ID INNER JOIN Stadium s ON m.Stadium = s.ID
 GO
 
@@ -195,7 +195,7 @@ GO
 
 CREATE VIEW allRequests
 AS 
-SELECT cr.Name AS ClubRepresentative , sm.Name AS StadiumManager , hr.Status
+SELECT cr.username AS ClubRepresentative , sm.username AS StadiumManager , hr.Status
 FROM HostRequest hr INNER JOIN ClubRepresentative cr ON hr.ClubRepresentative = cr.ID
 INNER JOIN StadiumManager sm ON sm.ID = hr.StadiumManager 
 GO
@@ -210,28 +210,21 @@ insert into SportsAssociationManager VALUES (@username, @name);
 GO
 
 CREATE PROCEDURE addNewMatch
-@first_club_name varchar(20),
-@second_club_name varchar(20),
-@host_name varchar(20),
-@match_time datetime
+@hostclub varchar(20),
+@guestclub varchar(20),
+@starttime datetime,
+@endtime datetime
 
 AS
 BEGIN
-DECLARE @ID1 int
-DECLARE @ID2 int
 DECLARE @idhost int
 DECLARE @idguest int
 
-select @id1 = id from club where name = @first_club_name
-select @id2 = id from club where name = @second_club_name
-select @idhost = id from club where name = @host_name
+select @idhost = id from club where name = @hostclub
+select @idguest = id from club where name = @guestclub
 
-if @id1 = @idhost
-	set @idguest = @id2
-else
-	set @idguest = @id1
 
-insert into match (StartTime, HostClub, GuestClub) values (@match_time, @idhost, @idguest);
+insert into match (StartTime, EndTime ,HostClub, GuestClub) values (@starttime , @endtime, @idhost, @idguest);
 END;
 GO
 
@@ -241,27 +234,20 @@ Select Name from Club EXCEPT ((select c.name from Match m INNER JOIN Club c ON m
 go
 
 CREATE PROCEDURE deleteMatch 
-
-@first_club_name varchar(20),
-@second_club_name varchar(20),
-@host_name varchar(20)
+@hostclub varchar(20),
+@guestclub varchar(20)
 AS
 BEGIN
-DECLARE @ID1 int
-DECLARE @ID2 int
 DECLARE @idhost int
 DECLARE @idguest int
+DECLARE @matchid int
 
-set @id1 = (select id from club where name = @first_club_name)
-set @id2 = (select id from club where name = @second_club_name)
-set @idhost = (select id from club where name = @host_name)
-
-if @id1 = @idhost
-	set @idguest = @id2
-else
-	set @idguest = @id1
-
+set @idhost = (select id from club where name = @hostclub)
+set @idguest = (select id from club where name = @guestclub)
+set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
+	
 delete from match where HostClub = @idhost AND guestClub = @idguest;
+delete from Ticket where Match = @matchid
 END
 Go
 
@@ -273,6 +259,7 @@ begin
 DECLARE @stid int
 set @stid =(select id from Stadium where name = @stadium_name)
 delete from Match where Stadium = @stid AND StartTime > CURRENT_TIMESTAMP
+-- should this also delete tickets?
 END
 Go
 
@@ -305,7 +292,10 @@ GO
 create procedure deleteClub
 @clubname varchar(20)
 AS
+DECLARE @clubid int
+set @clubid = (select id from Club where name = @clubname)
 delete from club where name = @clubname
+delete from Match where HostClub = @clubid OR GuestClub = @clubid
 GO
 
 create procedure addStadium
@@ -324,6 +314,7 @@ DECLARE @stadiumId int
 set @stadiumId = (select id from Stadium where Name = @Name)
 delete from Match where Stadium = @stadiumId
 delete from Stadium where Name = @name 
+--should this also delete tickets?
 end
 Go
 
@@ -415,7 +406,7 @@ RETURN ( SELECT cr.Name as ClubRepresentative, c.Name as GuestClub, m.StartTime 
 GO
 
 CREATE PROCEDURE acceptRequest
-@stadiumManagerName varchar(20),
+@stadiumManagerUserName varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
@@ -428,7 +419,7 @@ set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub 
 				inner join Club as gc on m.GuestClub = gc.ID
 				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'accepted' where Match_ID = @matchID 
-AND StadiumManager = (SELECT id FROM StadiumManager where Name = @stadiumManagerName)
+AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 set @capacity = (select s.Capacity from Match m INNER JOIN Stadium s ON m.Stadium = s.ID where m.ID = @matchID)
 WHILE @i <= @capacity 
 	BEGIN
@@ -439,7 +430,7 @@ end
 GO
 
 CREATE PROCEDURE rejectRequest
-@stadiumManagerName varchar(20),
+@stadiumManagerUserName varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
@@ -450,18 +441,19 @@ set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub 
 				inner join Club as gc on m.GuestClub = gc.ID
 				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'rejected' where Match_ID = @matchID 
-AND StadiumManager = (SELECT id FROM StadiumManager where Name = @stadiumManagerName)
+AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 end
 GO
 	
 CREATE PROCEDURE addFan
 @name varchar(20),
-@nationalId int,
+@username varchar(20),
+@password varchar(20),
+@nationalId varchar(20),
 @birthDate datetime,
 @address varchar(20),
-@phone int,
-@username varchar(20),
-@password varchar(20)
+@phone int
+
 AS
 insert into SystemUser Values (@username, @password)
 insert into Fan(Name, NationalID, BirthDate, Address, Phone) VALUES (@name, @nationalId, @birthDate, @address, @phone)
@@ -489,7 +481,7 @@ RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as
 GO
 
 CREATE PROCEDURE purchaseTicket
-@nationalId int,
+@nationalId varchar(20),
 @hostClubName varchar(20),
 @guestClubName varchar(20),
 @startTime datetime
