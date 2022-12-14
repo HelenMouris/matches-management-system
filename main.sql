@@ -539,21 +539,55 @@ AS
 return ((select club2 from clubsNeverMatched where club1 = @clubname) UNION (select club1 from clubsNeverMatched where club2 = @clubname))
 Go
 
-
 CREATE FUNCTION matchWithHighestAttendance()
 RETURNS TABLE
 AS
-RETURN (select TOP 1 m.HostClub , m.GuestClub , count(*) as count from Ticket t INNER JOIN Match m ON t.Match = m.ID WHERE t.Status = 0 group by m.HostClub , m.GuestClub order by count(*) DESC)
+RETURN (select TOP 1 hc.Name as HostName , gc.Name as GuestName, count(*) as count from Ticket t 
+INNER JOIN Match m ON t.Match = m.ID
+INNER JOIN Club hc on m.HostClub = hc.ID
+INNER JOIN Club gc on m.GuestClub = gc.ID
+WHERE t.Status = 0 group by hc.Name , gc.Name order by count(*) DESC)
 go
 
-CREATE FUNCTION [matchesRankedByAttendance]()
+/***CREATE FUNCTION matchesRankedByAttendance()
 RETURNS TABLE
 AS
-RETURN (select m.HostClub , m.GuestClub , count(*) as count , Rank() over(order by count desc) as attendancerank from Ticket t INNER JOIN Match m ON t.Match = m.ID WHERE t.Status = 0 group by m.HostClub , m.GuestClub order by attendancerank)
+RETURN (select m.HostClub , m.GuestClub , count(*) as count , Rank() over(order by count desc) as attendancerank from Ticket t 
+INNER JOIN Match m ON t.Match = m.ID 
+WHERE t.Status = 0 group by m.HostClub , m.GuestClub order by attendancerank)
+go***/
+
+CREATE FUNCTION matchesRankedByAttendance()
+RETURNS @res table (hostClub varchar(20), guestClub varchar(20), count int)
+AS
+begin
+
+insert into @res 
+select hc.Name as HostName , gc.Name as GuestName, count(*) as count from Ticket t 
+INNER JOIN Match m ON t.Match = m.ID
+INNER JOIN Club hc on m.HostClub = hc.ID
+INNER JOIN Club gc on m.GuestClub = gc.ID
+WHERE t.Status = 0 group by hc.Name , gc.Name order by count(*) desc
+
+return
+end
 go
 
 
+CREATE FUNCTION requestsFromClub(@stadiumname varchar(20) , @clubname varchar(20))
+RETURNS @res table (hostClub varchar(20), guestClub varchar(20))
+AS
+Begin
+DECLARE @smId int
 
-/* CREATE FUNCTION [matchesRankedByAttendance](@stadiumname varchar(20) , @clubname varchar(20))
-RETURNS TABLE
-AS */
+set @smId = (SELECT sm.ID from StadiumManager sm inner join Stadium s on sm.Stadium = s.ID where s.Name = @stadiumname) 
+insert into @res 
+SELECT hc.Name as HostName, gc.Name as GuestName from HostRequest h 
+inner join ClubRepresentative cr on h.ClubRepresentative = cr.ID
+inner join Club c on c.ID = cr.Club
+inner join Match m on m.ID = h.Match_ID
+inner join Club hc on hc.ID = m.HostClub
+inner join Club gc on gc.ID = m.GuestClub
+where c.Name = @clubname and h.StadiumManager = @smId and h.Status = 'unhandled'
+return
+end

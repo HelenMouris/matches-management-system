@@ -70,6 +70,7 @@ EXEC addRepresentative liverpool_rep, liverpool, liverpoolrep, liverpoolrep123;
 SELECT * FROM viewAvailableStadiumsOn('2022/12/1 21:00:00');
 
 EXEC addHostRequest ahly, elahly, '2022/12/1 20:00:00';
+EXEC addHostRequest zamalek, elahly, '2023/12/1 20:00:00';
 
 SELECT * FROM allUnassignedMatches('liverpool');
 
@@ -84,8 +85,7 @@ SELECT * FROM allPendingRequests('cairo_stadium_man');
 SELECT * FROM allPendingRequests('Camp_Nou_stadium_man');
 
 EXEC acceptRequest 'ahly_stadium_man', 'ahly', 'zamalek', '2022/12/1 20:00:00';
-
-EXEC acceptRequest 'ahly_stadium_man', 'ahly', 'zamalek', '2023/12/1 20:00:00';
+EXEC acceptRequest 'ahly_stadium_man', 'zamalek', 'ahly', '2023/12/1 20:00:00';
 EXEC rejectRequest 'ahly_stadium_man', 'ahly', 'zamalek', '2022/12/1 20:00:00';
 
 EXEC addFan helen, 1234567890, '2001/03/19 07:00:00', heliopolis, 01277262923 , helen_mo , helen123;
@@ -95,7 +95,7 @@ SELECT * from upcomingMatchesOfClub('ahly');
 
 SELECT * from availableMatchesToAttend('2022/12/2 20:00:00');
 
-EXEC purchaseTicket 1234567890, zamalek, ahly, '2023/12/1 20:00:00';
+EXEC purchaseTicket 1234567890, ahly, zamalek, '2022/12/1 20:00:00';
 EXEC purchaseTicket 123456789, zamalek, ahly, '2023/12/1 20:00:00';
 
 EXEC updateMatchHost zamalek , ahly , '2022/12/1 20:00:00';
@@ -106,3 +106,6 @@ SELECT * from clubsNeverMatched;
 Select * from clubsNeverPlayed('milan');
 
 select * from matchWithHighestAttendance();
+select * from matchesRankedByAttendance();
+
+select * from requestsFromClub('elahly','ahly');
