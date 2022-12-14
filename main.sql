@@ -169,21 +169,21 @@ drop function matchWithHighestAttendance
 drop function matchesRankedByAttendance
 drop function requestsFromClub
 GO
---drop procedure clearAllTables;
+
 CREATE PROCEDURE clearAllTables
 AS 
-truncate table HostRequest 
-truncate table Ticket 
---delete from ClubRepresentative
-truncate table ClubRepresentative 
-truncate table StadiumManager 
-truncate table Match 
-truncate table Club 
-truncate table Stadium 
-truncate table SystemAdmin 
-truncate table SportsAssociationManager 
-truncate table Fan 
-truncate table SystemUser
+delete from HostRequest 
+delete from Ticket 
+delete from ClubRepresentative
+delete from ClubRepresentative 
+delete from StadiumManager 
+delete from Match 
+delete from Club 
+delete from Stadium 
+delete from SystemAdmin 
+delete from SportsAssociationManager 
+delete from Fan 
+delete from SystemUser
 GO
 
 CREATE VIEW allAssocManagers

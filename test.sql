@@ -2,8 +2,8 @@
 
 EXEC dropAllTables;
 
---EXEC dropAllProceduresFunctionsViews;
-drop procedure createAllTables;
+EXEC dropAllProceduresFunctionsViews;
+
 EXEC clearAllTables;
 
 SELECT * from allAssocManagers;
