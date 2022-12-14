@@ -123,7 +123,52 @@ AS
 drop table HostRequest , Ticket , Match , ClubRepresentative , StadiumManager, Club , Stadium , SystemAdmin , SportsAssociationManager , Fan , SystemUser
 GO
 
---CREATE PROCEDURE dropAllProceduresFunctionsViews
+CREATE PROCEDURE dropAllProceduresFunctionsViews
+AS
+drop procedure createAllTables
+drop procedure dropAllTables
+drop procedure clearAllTables
+drop procedure addAssociationManager
+drop procedure addNewMatch
+drop procedure deleteMatch
+drop procedure deleteMatchesOnStadium
+drop procedure addClub
+drop procedure addTicket
+drop procedure deleteClub
+drop procedure addStadium
+drop procedure deleteStadium
+drop procedure blockFan
+drop procedure unblockFan
+drop procedure addRepresentative
+drop procedure addHostRequest
+drop procedure addStadiumManager
+drop procedure acceptRequest
+drop procedure rejectRequest
+drop procedure addFan
+drop procedure purchaseTicket
+drop procedure updateMatchHost
+drop view allAssocManagers
+drop view allClubRepresentatives
+drop view allStadiumManagers
+drop view allFans
+drop view allMatches
+drop view allTickets
+drop view allCLubs
+drop view allStadiums
+drop view allRequests
+drop view clubsWithNoMatches
+drop view matchesPerTeam
+drop view clubsNeverMatched
+drop function viewAvailableStadiumsOn
+drop function allUnassignedMatches
+drop function allPendingRequests
+drop function upcomingMatchesOfClub
+drop function availableMatchesToAttend
+drop function clubsNeverPlayed
+drop function matchWithHighestAttendance
+drop function matchesRankedByAttendance
+drop function requestsFromClub
+GO
 --drop procedure clearAllTables;
 CREATE PROCEDURE clearAllTables
 AS 
