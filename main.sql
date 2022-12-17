@@ -29,8 +29,8 @@ ID int IDENTITY,
 Name varchar(20),
 Stadium int,
 Primary Key(ID),
-Foreign Key(username) references SystemUser(username) on DELETE  NO ACTION on UPDATE  NO ACTION,
-Foreign Key(Stadium) references Stadium(ID) on DELETE NO ACTION on UPDATE NO ACTION
+Foreign Key(username) references SystemUser(username) on DELETE  Cascade on UPDATE  Cascade,
+Foreign Key(Stadium) references Stadium(ID) on DELETE Cascade on UPDATE Cascade
 )
 
 create table ClubRepresentative(
@@ -39,8 +39,8 @@ ID int IDENTITY,
 Name varchar(20),
 Primary Key(ID),
 Club int,
-Foreign Key(username) references SystemUser(username) on DELETE  NO ACTION on UPDATE  NO ACTION,
-Foreign Key(Club) references Club(ID)	 on DELETE NO ACTION  on UPDATE NO ACTION 
+Foreign Key(username) references SystemUser(username) on DELETE Cascade on UPDATE Cascade,
+Foreign Key(Club) references Club(ID) on DELETE Cascade on UPDATE Cascade 
 
 )
 
@@ -54,7 +54,7 @@ Address varchar(20),
 Status BIT DEFAULT '1',
 BirthDate datetime,
 Primary Key(NationalID),
-Foreign Key(username) references SystemUser(username) on DELETE  NO ACTION on UPDATE  NO ACTION
+Foreign Key(username) references SystemUser(username) on DELETE Cascade on UPDATE Cascade
 
 )
 
@@ -63,7 +63,7 @@ username varchar(20),
 ID int IDENTITY,
 Name varchar(20),
 Primary Key(ID),
-Foreign Key(username) references SystemUser(username)on DELETE  NO ACTION on UPDATE  NO ACTION
+Foreign Key(username) references SystemUser(username)on DELETE Cascade on UPDATE Cascade
  
 )
 
@@ -73,7 +73,7 @@ username varchar(20),
 ID int IDENTITY,
 Name varchar(20),
 Primary Key(ID),
-Foreign Key(username) references SystemUser(username) on DELETE  NO ACTION on UPDATE  NO ACTION
+Foreign Key(username) references SystemUser(username) on DELETE Cascade on UPDATE Cascade
 
 )
 
@@ -85,9 +85,9 @@ HostClub int,
 GuestClub int,
 Stadium int,
 Primary Key(ID),
-Foreign Key(HostClub) references Club(ID) on DELETE  NO ACTION on UPDATE  NO ACTION ,	 
+Foreign Key(HostClub) references Club(ID) on DELETE Cascade on UPDATE  NO ACTION ,	 
 Foreign Key(GuestClub) references Club(ID) on DELETE NO ACTION on UPDATE NO ACTION, 
-Foreign Key(Stadium) references Stadium(ID) on DELETE NO ACTION on UPDATE NO ACTION
+Foreign Key(Stadium) references Stadium(ID) on DELETE Cascade on UPDATE Cascade
 
 
 )
@@ -97,11 +97,11 @@ Foreign Key(Stadium) references Stadium(ID) on DELETE NO ACTION on UPDATE NO ACT
 create table Ticket(
 ID int IDENTITY,
 Status BIT DEFAULT '1',
-NationalID int,
+NationalID varchar(20),
 Match int,
 Primary Key(ID),
-Foreign Key(NationalID) references Fan(NationalID) on DELETE NO ACTION on UPDATE NO ACTION,
-Foreign Key(Match) references Match(ID) on DELETE NO ACTION on UPDATE NO ACTION
+Foreign Key(NationalID) references Fan(NationalID) on DELETE Cascade on UPDATE Cascade,
+Foreign Key(Match) references Match(ID) on DELETE Cascade on UPDATE Cascade
 
 )
 
@@ -112,7 +112,7 @@ Status varchar(20) DEFAULT 'unhandled' , CHECK (Status IN ('unhandled' , 'accept
 ClubRepresentative int,
 StadiumManager int,
 Primary Key(ID),
-Foreign Key(ClubRepresentative) references ClubRepresentative(ID) on DELETE NO ACTION on UPDATE NO ACTION, 
+Foreign Key(ClubRepresentative) references ClubRepresentative(ID) on DELETE Cascade on UPDATE Cascade, 
 Foreign Key(StadiumManager) references StadiumManager(ID) on DELETE NO ACTION on UPDATE NO ACTION,
 Foreign Key(Match_ID) references Match(ID) on DELETE NO ACTION on UPDATE NO ACTION
 )
@@ -212,10 +212,9 @@ GO
 
 CREATE VIEW allMatches
 AS
-SELECT HostClub , GuestClub , StartTime
-FROM Match
+SELECT hc.Name as HostClub , gc.Name as GuestClub , StartTime
+FROM Match m inner join Club hc on m.HostClub = hc.ID inner join Club gc on gc.ID = m.GuestClub
 GO
-
 
 CREATE VIEW allTickets
 AS
@@ -259,16 +258,12 @@ CREATE PROCEDURE addNewMatch
 @guestclub varchar(20),
 @starttime datetime,
 @endtime datetime
-
 AS
 BEGIN
 DECLARE @idhost int
 DECLARE @idguest int
-
 select @idhost = id from club where name = @hostclub
 select @idguest = id from club where name = @guestclub
-
-
 insert into match (StartTime, EndTime ,HostClub, GuestClub) values (@starttime , @endtime, @idhost, @idguest);
 END;
 GO
@@ -291,8 +286,9 @@ set @idhost = (select id from club where name = @hostclub)
 set @idguest = (select id from club where name = @guestclub)
 set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
 	
+--delete from Ticket where Match = @matchid
+delete from HostRequest where Match_ID = @matchid
 delete from match where HostClub = @idhost AND guestClub = @idguest;
-delete from Ticket where Match = @matchid
 END
 Go
 
@@ -303,8 +299,9 @@ AS
 begin
 DECLARE @stid int
 set @stid =(select id from Stadium where name = @stadium_name)
+-- TODO: handle here host request deletion
 delete from Match where Stadium = @stid AND StartTime > CURRENT_TIMESTAMP
--- should this also delete tickets?
+-- should this also delete tickets? NO
 END
 Go
 
@@ -339,8 +336,8 @@ create procedure deleteClub
 AS
 DECLARE @clubid int
 set @clubid = (select id from Club where name = @clubname)
-delete from club where name = @clubname
 delete from Match where HostClub = @clubid OR GuestClub = @clubid
+delete from club where name = @clubname
 GO
 
 create procedure addStadium
@@ -356,10 +353,9 @@ create procedure deleteStadium
 AS
 begin
 DECLARE @stadiumId int
-set @stadiumId = (select id from Stadium where Name = @Name)
+set @stadiumId = (select id from Stadium where Name = @name)
 delete from Match where Stadium = @stadiumId
 delete from Stadium where Name = @name 
---should this also delete tickets?
 end
 Go
 

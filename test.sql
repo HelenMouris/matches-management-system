@@ -1,5 +1,5 @@
 ﻿EXEC createAllTables;
-
+--drop procedure createAllTables;
 EXEC dropAllTables;
 
 EXEC dropAllProceduresFunctionsViews;
@@ -20,16 +20,20 @@ EXEC addAssociationManager Association_M1 , associationM1 , assocPass123;
 EXEC addAssociationManager Association_M2 , associationM2 , assocPass1232;
 EXEC addAssociationManager Association_M3 , associationM3 , assocPass1233;
 EXEC addAssociationManager Association_M4 , associationM4 , assocPass1234;
+EXEC addAssociationManager Association_M5 , associationM5 , assocPass1235;
+EXEC addAssociationManager Association_M6 , associationM6 , assocPass1236;
+EXEC addAssociationManager Association_M7 , associationM7 , assocPass1237;
+EXEC addAssociationManager Association_M8 , associationM8 , assocPass1238;
 
-EXEC addNewMatch ahly, zamalek, ahly, '2022/12/1 20:00:00';
-EXEC addNewMatch zamalek, ahly, ahly, '2023/12/1 20:00:00';
-EXEC addNewMatch liverpool, milan, milan, '2021/12/1 20:00:00';
-EXEC addNewMatch liverpool, milan, liverpool, '2021/11/24 18:30:00';
-EXEC addNewMatch arsenal, real_madrid, arsenal, '2022/5/1 21:00:00';
+EXEC addNewMatch ahly, zamalek, '2022/12/1 20:00:00', '2022/12/1 22:00:00';
+EXEC addNewMatch zamalek, ahly, '2023/12/1 20:00:00', '2023/12/1 23:00:00';
+EXEC addNewMatch liverpool, milan, '2021/12/1 20:00:00', '2021/12/1 21:00:00';
+EXEC addNewMatch liverpool, milan, '2021/11/24 18:30:00', '2021/11/24 20:00:00';
+EXEC addNewMatch arsenal, real_madrid,'2022/5/1 21:00:00', '2022/5/1 23:00:00';
 
 SELECT * from clubsWithNoMatches;
 
-EXEC deleteMatch ahly, zamalek, ahly;
+EXEC deleteMatch ahly, zamalek;
 
 EXEC deleteMatchesOnStadium elahly;
 
@@ -40,6 +44,12 @@ EXEC addClub milan, italy;
 EXEC addClub arsenal, england;
 EXEC addClub real_madrid, spain;
 EXEC addClub barcelona, spain;
+EXEC addClub egypt, egypt;
+EXEC addClub brazil, brazil;
+EXEC addClub argentine, argentine;
+EXEC addClub france, france;
+EXEC addClub spain, spain;
+EXEC addClub england, england;
 
 EXEC addTicket ahly, zamalek, '2022/12/1 20:00:00';
 EXEC addTicket ahly, zamalek, '2022/12/1 20:00:00';
@@ -51,11 +61,11 @@ EXEC addTicket milan, liverpool, '2021/12/1 20:00:00';
 EXEC deleteClub ahly;
 EXEC deleteClub liverpool;
 
-EXEC addStadium elahly, egypt, 10000;
-EXEC addStadium cairo, egypt, 20000;
-EXEC addStadium Camp_Nou, spain, 30000;
-EXEC addStadium Borg_El_Arab, egypt, 15000;
-EXEC addStadium Tottenham, england, 30000;
+EXEC addStadium elahly, egypt, 100;
+EXEC addStadium cairo, egypt, 200;
+EXEC addStadium Camp_Nou, spain, 300;
+EXEC addStadium Borg_El_Arab, egypt, 150;
+EXEC addStadium Tottenham, england, 300;
 
 EXEC deleteStadium elahly;
 
@@ -65,6 +75,9 @@ EXEC unblockFan 1234567890;
 EXEC addRepresentative ahly_rep, ahly, ahlyrep, ahlyrep123;
 EXEC addRepresentative zamalek_rep, zamalek, zamalekrep, zamalekrep123;
 EXEC addRepresentative liverpool_rep, liverpool, liverpoolrep, liverpoolrep123;
+EXEC addRepresentative egypt_rep, egypt, egyptrep, egyptrep123;
+EXEC addRepresentative spain_rep, spain, spainrep, spainrep123;
+EXEC addRepresentative brazil_rep, brazil, brazilrep, brazilrep123;
 
 
 SELECT * FROM viewAvailableStadiumsOn('2022/12/1 21:00:00');
