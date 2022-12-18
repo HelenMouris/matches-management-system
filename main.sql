@@ -436,11 +436,11 @@ CREATE FUNCTION  allPendingRequests(@stadiumManagerName varchar(20))
 RETURNS TABLE  
 AS  
 RETURN ( SELECT cr.Name as ClubRepresentative, c.Name as GuestClub, m.StartTime from HostRequest as hr
-		 inner join StadiumManager as sm on hr.StadiumManager = sm.ID
-		 inner join ClubRepresentative as cr on hr.ClubRepresentative = cr.ID
-		 inner join Match as m on hr.Match_ID = m.ID
-		 inner join Club as c on m.GuestClub = c.ID
-		 where sm.username = @stadiumManagerName and hr.Status = 'unhandled' )
+inner join StadiumManager as sm on hr.StadiumManager = sm.ID
+inner join ClubRepresentative as cr on hr.ClubRepresentative = cr.ID
+inner join Match as m on hr.Match_ID = m.ID
+inner join Club as c on m.GuestClub = c.ID
+where sm.username = @stadiumManagerName and hr.Status = 'unhandled' )
 GO
 
 CREATE PROCEDURE acceptRequest
@@ -454,8 +454,8 @@ DECLARE @capacity int
 DECLARE @matchID int
 Declare @i int = 1
 set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub = hc.ID
-				inner join Club as gc on m.GuestClub = gc.ID
-				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
+inner join Club as gc on m.GuestClub = gc.ID
+where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'accepted' where Match_ID = @matchID 
 AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 UPDATE Match set Stadium = (SELECT s.id FROM Stadium s inner join StadiumManager sm on s.ID = sm.Stadium where sm.username = @stadiumManagerUserName) where ID = @matchID
@@ -477,8 +477,8 @@ AS
 begin
 DECLARE @matchID int
 set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub = hc.ID
-				inner join Club as gc on m.GuestClub = gc.ID
-				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
+inner join Club as gc on m.GuestClub = gc.ID
+where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'rejected' where Match_ID = @matchID 
 AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
 end
@@ -502,21 +502,21 @@ CREATE FUNCTION  upcomingMatchesOfClub(@clubName varchar(20))
 RETURNS TABLE  
 AS  
 RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as stadium
-		from Club hc inner join Match m on hc.ID = m.HostClub 
-		inner join Club gc on gc.ID = m.GuestClub
-		left outer join  Stadium s on m.Stadium = s.ID
-		where (hc.Name = @clubName OR gc.Name = @clubName) AND m.StartTime > CURRENT_TIMESTAMP)
+from Club hc inner join Match m on hc.ID = m.HostClub 
+inner join Club gc on gc.ID = m.GuestClub
+left outer join  Stadium s on m.Stadium = s.ID
+where (hc.Name = @clubName OR gc.Name = @clubName) AND m.StartTime > CURRENT_TIMESTAMP)
 GO
 
 CREATE FUNCTION  availableMatchesToAttend(@date datetime)  
 RETURNS TABLE  
 AS  
 RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as stadium
-		from Club hc inner join Match m on hc.ID = m.HostClub 
-		inner join Club gc on gc.ID = m.GuestClub
-		inner join  Stadium s on m.Stadium = s.ID
-		where m.StartTime >= @date AND 
-		(SELECT count(ID) from Ticket t where t.Match = m.ID and t.Status = 1) > 0)
+from Club hc inner join Match m on hc.ID = m.HostClub 
+inner join Club gc on gc.ID = m.GuestClub
+inner join  Stadium s on m.Stadium = s.ID
+where m.StartTime >= @date AND 
+(SELECT count(ID) from Ticket t where t.Match = m.ID and t.Status = 1) > 0)
 GO
 
 CREATE PROCEDURE purchaseTicket
@@ -529,8 +529,8 @@ begin
 DECLARE @matchID int
 DECLARE @ticketID int
 set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub = hc.ID
-				inner join Club as gc on m.GuestClub = gc.ID
-				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
+inner join Club as gc on m.GuestClub = gc.ID
+where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 set @ticketID = (SELECT Top(1) ID from Ticket where Match = @matchID and Status = 1)
 UPDATE Ticket set Status = 0, NationalID = @nationalId where ID = @ticketID
 end
@@ -558,8 +558,8 @@ AS
 (select c3.name as club1, c4.name as club2 FROM Club c3, Club c4 where c3.ID <> c4.ID and c3.ID < c4.ID)
 EXCEPT 
 ((select c1.name as club1, c2.name as club2
-FROM Club c1 INNER JOIN Match m ON c1.ID = m.HostClub INNER JOIN Club c2 ON m.GuestClub = c2.ID) 
-UNION (select c1.name as club1 , c2.name as club2 from Club c1 INNER JOIN Match m ON c1.ID = m.GuestClub INNER JOIN Club c2 ON m.HostClub = c2.ID))
+FROM Club c1 INNER JOIN Match m ON c1.ID = m.HostClub INNER JOIN Club c2 ON m.GuestClub = c2.ID where m.StartTime < CURRENT_TIMESTAMP) 
+UNION (select c1.name as club1 , c2.name as club2 from Club c1 INNER JOIN Match m ON c1.ID = m.GuestClub INNER JOIN Club c2 ON m.HostClub = c2.ID where m.StartTime < CURRENT_TIMESTAMP))
 GO
 
 
@@ -589,7 +589,7 @@ select hc.Name as HostName , gc.Name as GuestName, count(*) as count, Rank() ove
 INNER JOIN Match m ON t.Match = m.ID
 INNER JOIN Club hc on m.HostClub = hc.ID
 INNER JOIN Club gc on m.GuestClub = gc.ID
-WHERE t.Status = 0 group by hc.Name , gc.Name order by countrank desc
+WHERE t.Status = 0 AND m.StartTime < CURRENT_TIMESTAMP group by hc.Name , gc.Name order by countrank desc
 
 insert into @res 
 select hostClub , guestClub from @temp

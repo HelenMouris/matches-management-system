@@ -111,7 +111,7 @@ SELECT * from upcomingMatchesOfClub('ahly');
 
 SELECT * from availableMatchesToAttend('2022/12/2 20:00:00');
 
-EXEC purchaseTicket 1234567890, zamalek, ahly, '2022/12/1 20:00:00';
+EXEC purchaseTicket 1234567890, ahly, zamalek, '2022/12/1 20:00:00';
 EXEC purchaseTicket 123456789, zamalek, ahly, '2023/12/1 20:00:00';
 
 EXEC updateMatchHost zamalek , ahly , '2022/12/1 20:00:00';
