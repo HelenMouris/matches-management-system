@@ -218,10 +218,10 @@ GO
 
 CREATE VIEW allTickets
 AS
-SELECT m.HostClub , m.GuestClub , s.Name as Stadium , StartTime
+SELECT hc.Name as HostClub , gc.Name as GuestClub , s.Name as Stadium , StartTime
 FROM Ticket t INNER JOIN Match m ON T.Match = m.ID INNER JOIN Stadium s ON m.Stadium = s.ID
+inner join Club hc on m.HostClub = hc.ID inner join Club gc on m.GuestClub = gc.ID
 GO
-
 
 CREATE VIEW allCLubs
 AS 
@@ -286,12 +286,10 @@ set @idhost = (select id from club where name = @hostclub)
 set @idguest = (select id from club where name = @guestclub)
 set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
 	
---delete from Ticket where Match = @matchid
 delete from HostRequest where Match_ID = @matchid
 delete from match where HostClub = @idhost AND guestClub = @idguest;
 END
 Go
-
 
 create procedure deleteMatchesOnStadium
 @stadium_name varchar(20)
@@ -299,9 +297,8 @@ AS
 begin
 DECLARE @stid int
 set @stid =(select id from Stadium where name = @stadium_name)
--- TODO: handle here host request deletion
+delete from HostRequest where Match_ID in (SELECT id from Match where Stadium = @stid AND StartTime > CURRENT_TIMESTAMP)
 delete from Match where Stadium = @stid AND StartTime > CURRENT_TIMESTAMP
--- should this also delete tickets? NO
 END
 Go
 
@@ -443,7 +440,7 @@ RETURN ( SELECT cr.Name as ClubRepresentative, c.Name as GuestClub, m.StartTime 
 		 inner join ClubRepresentative as cr on hr.ClubRepresentative = cr.ID
 		 inner join Match as m on hr.Match_ID = m.ID
 		 inner join Club as c on m.GuestClub = c.ID
-		 where sm.Name = @stadiumManagerName and hr.Status = 'unhandled' )
+		 where sm.username = @stadiumManagerName and hr.Status = 'unhandled' )
 GO
 
 CREATE PROCEDURE acceptRequest
@@ -461,6 +458,7 @@ set @matchID = (SELECT m.ID from Match as m inner join Club as hc on m.HostClub 
 				where m.StartTime = @startTime AND hc.Name = @hostClubName AND gc.Name = @guestClubName)
 UPDATE HostRequest set Status = 'accepted' where Match_ID = @matchID 
 AND StadiumManager = (SELECT id FROM StadiumManager where username = @stadiumManagerUserName)
+UPDATE Match set Stadium = (SELECT s.id FROM Stadium s inner join StadiumManager sm on s.ID = sm.Stadium where sm.username = @stadiumManagerUserName) where ID = @matchID
 set @capacity = (select s.Capacity from Match m INNER JOIN Stadium s ON m.Stadium = s.ID where m.ID = @matchID)
 WHILE @i <= @capacity 
 	BEGIN
@@ -497,7 +495,7 @@ CREATE PROCEDURE addFan
 
 AS
 insert into SystemUser Values (@username, @password)
-insert into Fan(Name, NationalID, BirthDate, Address, Phone) VALUES (@name, @nationalId, @birthDate, @address, @phone)
+insert into Fan(Name, NationalID, BirthDate, Address, Phone, username) VALUES (@name, @nationalId, @birthDate, @address, @phone, @username)
 GO
 
 CREATE FUNCTION  upcomingMatchesOfClub(@clubName varchar(20))  
@@ -506,7 +504,7 @@ AS
 RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as stadium
 		from Club hc inner join Match m on hc.ID = m.HostClub 
 		inner join Club gc on gc.ID = m.GuestClub
-		inner join  Stadium s on m.Stadium = s.ID
+		left outer join  Stadium s on m.Stadium = s.ID
 		where (hc.Name = @clubName OR gc.Name = @clubName) AND m.StartTime > CURRENT_TIMESTAMP)
 GO
 
@@ -548,11 +546,10 @@ Update Match Set HostClub = (select id from Club where Name = @guestclub) , Gues
 WHERE HostClub = (select id from Club where Name = @hostclub) AND GuestClub = (select id from Club where Name = @guestclub) AND StartTime = @date
 go
 
-
 CREATE VIEW matchesPerTeam
-AS 
-select c.Name , count(*) as NumberOfMatches 
-from Club c LEFT OUTER JOIN Match m ON c.ID = m.HostClub OR c.ID = m.GuestClub WHERE m.StartTime < CURRENT_TIMESTAMP
+AS
+select c.Name , count(m.ID) as NumberOfMatches 
+from Club c LEFT OUTER JOIN (SELECT * FROM Match WHERE StartTime < CURRENT_TIMESTAMP ) as m ON c.ID = m.HostClub OR c.ID = m.GuestClub 
 group by c.Name
 GO
 
@@ -575,13 +572,12 @@ Go
 CREATE FUNCTION matchWithHighestAttendance()
 RETURNS TABLE
 AS
-RETURN (select TOP 1 hc.Name as HostName , gc.Name as GuestName, count(*) as count from Ticket t 
+RETURN (select TOP 1 hc.Name as HostName , gc.Name as GuestName from Ticket t 
 INNER JOIN Match m ON t.Match = m.ID
 INNER JOIN Club hc on m.HostClub = hc.ID
 INNER JOIN Club gc on m.GuestClub = gc.ID
 WHERE t.Status = 0 group by hc.Name , gc.Name order by count(*) DESC)
 go
-
 
 CREATE FUNCTION matchesRankedByAttendance()
 RETURNS @res table (hostClub varchar(20), guestClub varchar(20))

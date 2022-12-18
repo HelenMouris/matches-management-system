@@ -1,5 +1,5 @@
 ﻿EXEC createAllTables;
---drop procedure createAllTables;
+
 EXEC dropAllTables;
 
 EXEC dropAllProceduresFunctionsViews;
@@ -30,6 +30,9 @@ EXEC addNewMatch zamalek, ahly, '2023/12/1 20:00:00', '2023/12/1 23:00:00';
 EXEC addNewMatch liverpool, milan, '2021/12/1 20:00:00', '2021/12/1 21:00:00';
 EXEC addNewMatch liverpool, milan, '2021/11/24 18:30:00', '2021/11/24 20:00:00';
 EXEC addNewMatch arsenal, real_madrid,'2022/5/1 21:00:00', '2022/5/1 23:00:00';
+EXEC addNewMatch liverpool, arsenal, '2023/11/1 20:00:00', '2023/12/1 23:00:00';
+EXEC addNewMatch egypt, brazil, '2023/8/1 20:00:00', '2023/12/1 23:00:00';
+EXEC addNewMatch egypt, france, '2023/1/1 20:00:00', '2023/12/1 23:00:00';
 
 SELECT * from clubsWithNoMatches;
 
@@ -93,22 +96,22 @@ EXEC addStadiumManager Camp_Nou_stadium_man, Camp_Nou, Camp_Noustadiummanager, C
 EXEC addStadiumManager Tottenham_stadium_man, Tottenham, Tottenhamstadiummanager, Tottenhamstadiummanager123;
 
 
-SELECT * FROM allPendingRequests('ahly_stadium_man');
-SELECT * FROM allPendingRequests('cairo_stadium_man');
-SELECT * FROM allPendingRequests('Camp_Nou_stadium_man');
+SELECT * FROM allPendingRequests('ahlystadiummanager');
+SELECT * FROM allPendingRequests('cairostadiummanager');
+SELECT * FROM allPendingRequests('Camp_Noustadiummanager');
 
-EXEC acceptRequest 'ahly_stadium_man', 'ahly', 'zamalek', '2022/12/1 20:00:00';
-EXEC acceptRequest 'ahly_stadium_man', 'zamalek', 'ahly', '2023/12/1 20:00:00';
-EXEC rejectRequest 'ahly_stadium_man', 'ahly', 'zamalek', '2022/12/1 20:00:00';
+EXEC acceptRequest 'ahlystadiummanager', 'ahly', 'zamalek', '2022/12/1 20:00:00';
+EXEC acceptRequest 'ahlystadiummanager', 'zamalek', 'ahly', '2023/12/1 20:00:00';
+EXEC acceptRequest 'ahlystadiummanager', 'zamalek', 'ahly', '2022/12/1 20:00:00';
 
-EXEC addFan helen, 1234567890, '2001/03/19 07:00:00', heliopolis, 01277262923 , helen_mo , helen123;
-EXEC addFan helen, 123456789, '2001/03/19 07:00:00', heliopolis, 01277262923 , helen_mo2 , helen123;
+EXEC addFan helen,  helen_mo , helen123, 1234567890, '2001/03/19 07:00:00', heliopolis, 01277262923;
+EXEC addFan mina, mina_mo2 , mina123, 123456789, '2002/03/19 07:00:00', heliopolis, 01277262923;
 
 SELECT * from upcomingMatchesOfClub('ahly');
 
 SELECT * from availableMatchesToAttend('2022/12/2 20:00:00');
 
-EXEC purchaseTicket 1234567890, ahly, zamalek, '2022/12/1 20:00:00';
+EXEC purchaseTicket 1234567890, zamalek, ahly, '2022/12/1 20:00:00';
 EXEC purchaseTicket 123456789, zamalek, ahly, '2023/12/1 20:00:00';
 
 EXEC updateMatchHost zamalek , ahly , '2022/12/1 20:00:00';
@@ -116,9 +119,9 @@ EXEC updateMatchHost zamalek , ahly , '2022/12/1 20:00:00';
 SELECT * from matchesPerTeam;
 SELECT * from clubsNeverMatched;
 
-Select * from clubsNeverPlayed('milan');
+Select * from clubsNeverPlayed('egypt');
 
 select * from matchWithHighestAttendance();
 select * from matchesRankedByAttendance();
 
-select * from requestsFromClub('elahly','ahly');
+select * from requestsFromClub('elahly','zamalek');
