@@ -55,6 +55,36 @@
             top: 623px;
             left: 10px;
         }
+        .auto-style11 {
+            position: absolute;
+            top: 751px;
+            left: 10px;
+            z-index: 1;
+        }
+        .auto-style12 {
+            position: absolute;
+            top: 794px;
+            left: 10px;
+        }
+        .auto-style13 {
+            position: absolute;
+            top: 874px;
+            left: 10px;
+            z-index: 1;
+            right: 963px;
+        }
+        .auto-style14 {
+            position: absolute;
+            top: 905px;
+            left: 11px;
+            z-index: 1;
+        }
+        .auto-style15 {
+            position: absolute;
+            top: 906px;
+            left: 78px;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -101,6 +131,29 @@
             <br />
             <br />
             <asp:Button ID="AddStadium" runat="server" CssClass="auto-style10" OnClick="AddStadium" Style="z-index: 1" Text="AddStadium" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            Stadium name:<br />
+            <br />
+            <asp:TextBox ID="Stadiumname2" runat="server" CssClass="auto-style11"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="deleteStadium" runat="server" CssClass="auto-style12" OnClick="DeleteStadium" Style="z-index: 1" Text="DeleteStadium" />
+            <br />
+            <br />
+            <br />
+            NationalID:<br />
+            <asp:TextBox ID="nationalid1" runat="server" CssClass="auto-style13"></asp:TextBox>
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="Block" runat="server" CssClass="auto-style14" Text="Block" OnClick="block_Click" />
+            <br />
+            <asp:Button ID="Unblock" runat="server" CssClass="auto-style15" Text="unblock" OnClick="unblock_Click" />
+            <br />
             <br />
             <br />
             <br />
