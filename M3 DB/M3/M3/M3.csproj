@@ -67,19 +67,60 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddMatch.aspx" />
+    <Content Include="AddSportsAssociationManager.aspx" />
+    <Content Include="AlreadyPlayedMatches.aspx" />
     <Content Include="ClubRepresentative.aspx" />
+    <Content Include="ClubsNeverPlayed.aspx" />
+    <Content Include="DeleteMatch.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="SportsAssociationManager.aspx" />
     <Content Include="SystemAdmin.aspx" />
+    <Content Include="UpcomingMatches.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddMatch.aspx.cs">
+      <DependentUpon>AddMatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMatch.aspx.designer.cs">
+      <DependentUpon>AddMatch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddSportsAssociationManager.aspx.cs">
+      <DependentUpon>AddSportsAssociationManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddSportsAssociationManager.aspx.designer.cs">
+      <DependentUpon>AddSportsAssociationManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlreadyPlayedMatches.aspx.cs">
+      <DependentUpon>AlreadyPlayedMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlreadyPlayedMatches.aspx.designer.cs">
+      <DependentUpon>AlreadyPlayedMatches.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClubRepresentative.aspx.cs">
       <DependentUpon>ClubRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ClubRepresentative.aspx.designer.cs">
       <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubsNeverPlayed.aspx.cs">
+      <DependentUpon>ClubsNeverPlayed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubsNeverPlayed.aspx.designer.cs">
+      <DependentUpon>ClubsNeverPlayed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteMatch.aspx.cs">
+      <DependentUpon>DeleteMatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteMatch.aspx.designer.cs">
+      <DependentUpon>DeleteMatch.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -102,6 +143,13 @@
     </Compile>
     <Compile Include="SystemAdmin.aspx.designer.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpcomingMatches.aspx.cs">
+      <DependentUpon>UpcomingMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpcomingMatches.aspx.designer.cs">
+      <DependentUpon>UpcomingMatches.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

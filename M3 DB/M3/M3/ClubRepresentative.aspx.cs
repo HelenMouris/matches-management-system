@@ -30,7 +30,7 @@ namespace M3
             String cpassword = password.Text;
             String club = clubname.Text;
 
-            SqlCommand addRepresentativeProcedure = new SqlCommand(" addRepresentative ", conn);
+            SqlCommand addRepresentativeProcedure = new SqlCommand("addRepresentative", conn);
             addRepresentativeProcedure.CommandType = CommandType.StoredProcedure;
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@name", cname));
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@username", cusername));

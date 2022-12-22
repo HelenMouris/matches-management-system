@@ -11,7 +11,7 @@ namespace M3
 {
 
 
-    public partial class SportsAssociationManager
+    public partial class AddSportsAssociationManager
     {
 
         /// <summary>
@@ -24,48 +24,66 @@ namespace M3
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// addMatch control.
+        /// namelabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addMatch;
+        protected global::System.Web.UI.WebControls.Label namelabel;
 
         /// <summary>
-        /// deleteMatch control.
+        /// name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteMatch;
+        protected global::System.Web.UI.WebControls.TextBox name;
 
         /// <summary>
-        /// viewUpcomingMatches control.
+        /// usernamelabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button viewUpcomingMatches;
+        protected global::System.Web.UI.WebControls.Label usernamelabel;
 
         /// <summary>
-        /// viewAlreadyPlayedMatches control.
+        /// username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button viewAlreadyPlayedMatches;
+        protected global::System.Web.UI.WebControls.TextBox username;
 
         /// <summary>
-        /// clubsNeverPlayed control.
+        /// passwordlabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clubsNeverPlayed;
+        protected global::System.Web.UI.WebControls.Label passwordlabel;
+
+        /// <summary>
+        /// password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox password;
+
+        /// <summary>
+        /// addAssociationManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button addAssociationManager;
     }
 }
