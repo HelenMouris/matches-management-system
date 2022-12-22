@@ -1,0 +1,2 @@
+D:\repos\database-project\M3 DB\M3\M3\obj\Debug\M3.csproj.AssemblyReference.cache
+D:\repos\database-project\M3 DB\M3\M3\obj\Debug\M3.csproj.CoreCompileInputs.cache
