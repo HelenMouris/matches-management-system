@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClubRepClubInfo.aspx" />
     <Content Include="RegisterClubRepresentative.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="SportsAssociationManager.aspx" />
@@ -74,6 +75,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClubRepClubInfo.aspx.cs">
+      <DependentUpon>ClubRepClubInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubRepClubInfo.aspx.designer.cs">
+      <DependentUpon>ClubRepClubInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RegisterClubRepresentative.aspx.cs">
       <DependentUpon>RegisterClubRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
