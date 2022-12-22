@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace M3
 {
-    public partial class ClubRepClubInfo : System.Web.UI.Page
+    public partial class ClubRepUpcomingMatches : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,7 +20,6 @@ namespace M3
 
             string username = "ahlyrep";
             string clubName = "";
-            string clubLocation;
 
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
@@ -35,23 +34,16 @@ namespace M3
                 clubName = rdr.GetString(rdr.GetOrdinal("Club"));
             }
             conn.Close();
+
             conn.Open();
-            var sql2 = String.Format("select * from allCLubs where [Name] = '{0}' ", clubName);
-            SqlCommand clubs = new SqlCommand(sql2, conn);
-            SqlDataReader rdr2 = clubs.ExecuteReader(CommandBehavior.CloseConnection);
-            while (rdr2.Read())
-            {
-                clubLocation = rdr2.GetString(rdr2.GetOrdinal("Location"));
-
-                Label nameLabel = new Label();
-                nameLabel.Text =  "Name: " + clubName + "<br>";
-                Label locationLabel = new Label();
-                locationLabel.Text = "Location: " + clubLocation + "<br>";
-                form1.Controls.Add(nameLabel);
-                form1.Controls.Add(locationLabel);
-            }
-
+            var sql2 = String.Format("select * from upcomingMatchesOfClub(@clubName)");
+            SqlCommand upcomingMatches = new SqlCommand(sql2, conn);
+            upcomingMatches.Parameters.Add(new SqlParameter("@clubName", clubName));
+            SqlDataReader rdr2 = upcomingMatches.ExecuteReader(CommandBehavior.CloseConnection);
+            GridView1.DataSource = rdr2;
+            GridView1.DataBind();
             conn.Close();
+
         }
     }
 }
