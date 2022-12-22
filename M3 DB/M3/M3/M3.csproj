@@ -67,19 +67,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClubRepresentative.aspx" />
+    <Content Include="RegisterClubRepresentative.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="SportsAssociationManager.aspx" />
     <Content Include="SystemAdmin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClubRepresentative.aspx.cs">
-      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    <Compile Include="RegisterClubRepresentative.aspx.cs">
+      <DependentUpon>RegisterClubRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClubRepresentative.aspx.designer.cs">
-      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    <Compile Include="RegisterClubRepresentative.aspx.designer.cs">
+      <DependentUpon>RegisterClubRepresentative.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

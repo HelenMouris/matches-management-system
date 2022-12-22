@@ -12,7 +12,7 @@ using System.Data;
 
 namespace M3
 {
-    public partial class ClubRepresentative : System.Web.UI.Page
+    public partial class RegisterClubRepresentative : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,14 +30,12 @@ namespace M3
             String cpassword = password.Text;
             String club = clubname.Text;
 
-            SqlCommand addRepresentativeProcedure = new SqlCommand(" addRepresentative ", conn);
+            SqlCommand addRepresentativeProcedure = new SqlCommand("addRepresentative", conn);
             addRepresentativeProcedure.CommandType = CommandType.StoredProcedure;
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@name", cname));
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@username", cusername));
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@password", cpassword));
             addRepresentativeProcedure.Parameters.Add(new SqlParameter("@clubname", club));
-
-
 
 
             conn.Open();
