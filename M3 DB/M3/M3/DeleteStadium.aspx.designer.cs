@@ -11,7 +11,7 @@ namespace M3
 {
 
 
-    public partial class SystemAdmin
+    public partial class DeleteStadium
     {
 
         /// <summary>
@@ -24,57 +24,30 @@ namespace M3
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// addclub control.
+        /// stadiumname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addclub;
+        protected global::System.Web.UI.WebControls.Label stadiumname;
 
         /// <summary>
-        /// deleteclub control.
+        /// stadname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteclub;
+        protected global::System.Web.UI.WebControls.TextBox stadname;
 
         /// <summary>
-        /// addstadium control.
+        /// sname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addstadium;
-
-        /// <summary>
-        /// deletestadium control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deletestadium;
-
-        /// <summary>
-        /// block control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button block;
-
-        /// <summary>
-        /// unblock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button unblock;
+        protected global::System.Web.UI.WebControls.Button sname;
     }
 }

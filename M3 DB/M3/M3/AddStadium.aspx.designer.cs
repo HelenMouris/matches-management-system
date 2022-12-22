@@ -11,7 +11,7 @@ namespace M3
 {
 
 
-    public partial class SystemAdmin
+    public partial class AddStadium
     {
 
         /// <summary>
@@ -24,57 +24,66 @@ namespace M3
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// addclub control.
+        /// stadiumname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addclub;
+        protected global::System.Web.UI.WebControls.Label stadiumname;
 
         /// <summary>
-        /// deleteclub control.
+        /// sname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteclub;
+        protected global::System.Web.UI.WebControls.TextBox sname;
 
         /// <summary>
-        /// addstadium control.
+        /// stadiumloc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addstadium;
+        protected global::System.Web.UI.WebControls.Label stadiumloc;
 
         /// <summary>
-        /// deletestadium control.
+        /// slocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deletestadium;
+        protected global::System.Web.UI.WebControls.TextBox slocation;
 
         /// <summary>
-        /// block control.
+        /// stadiumcap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button block;
+        protected global::System.Web.UI.WebControls.Label stadiumcap;
 
         /// <summary>
-        /// unblock control.
+        /// scapacity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button unblock;
+        protected global::System.Web.UI.WebControls.TextBox scapacity;
+
+        /// <summary>
+        /// addStad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button addStad;
     }
 }
