@@ -67,11 +67,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClubRepresentative.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="SportsAssociationManager.aspx" />
     <Content Include="SystemAdmin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClubRepresentative.aspx.cs">
+      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubRepresentative.aspx.designer.cs">
+      <DependentUpon>ClubRepresentative.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,6 +89,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SportsAssociationManager.aspx.cs">
+      <DependentUpon>SportsAssociationManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SportsAssociationManager.aspx.designer.cs">
+      <DependentUpon>SportsAssociationManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemAdmin.aspx.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

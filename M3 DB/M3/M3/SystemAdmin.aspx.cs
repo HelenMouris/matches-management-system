@@ -17,7 +17,7 @@ namespace M3
 
         }
 
-        protected void addclub(object sender, EventArgs e)
+        protected void addClub(object sender, EventArgs e)
         {
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
@@ -55,7 +55,7 @@ namespace M3
             conn.Close();
         }
 
-        protected void AddStadium(object sender, EventArgs e)
+        protected void addStadium(object sender, EventArgs e)
         {
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
@@ -73,6 +73,60 @@ namespace M3
 
             conn.Open();
             addstadiumProcedure.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        protected void DeleteStadium(object sender, EventArgs e)
+        {
+            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+
+            String sName = Stadiumname2.Text;
+           
+            SqlCommand deletestadiumProcedure = new SqlCommand(" deleteStadium", conn);
+            deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
+            deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
+          
+
+
+            conn.Open();
+            deletestadiumProcedure.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        protected void block_Click(object sender, EventArgs e)
+        {
+            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+
+            String nationalid = nationalid1.Text;
+
+            SqlCommand blockProcedure = new SqlCommand(" blockFan", conn);
+            blockProcedure.CommandType = CommandType.StoredProcedure;
+            blockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
+
+
+
+            conn.Open();
+            blockProcedure.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        protected void unblock_Click(object sender, EventArgs e)
+        {
+            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
+
+            String nationalid = nationalid1.Text;
+
+            SqlCommand unblockProcedure = new SqlCommand(" unblockFan", conn);
+            unblockProcedure.CommandType = CommandType.StoredProcedure;
+            unblockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
+
+
+
+            conn.Open();
+           unblockProcedure.ExecuteNonQuery();
             conn.Close();
         }
     }
