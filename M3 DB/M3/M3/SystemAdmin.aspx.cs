@@ -83,7 +83,7 @@ namespace M3
 
             String sName = Stadiumname2.Text;
            
-            SqlCommand deletestadiumProcedure = new SqlCommand(" deleteStadium", conn);
+            SqlCommand deletestadiumProcedure = new SqlCommand("deleteStadium", conn);
             deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
             deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
           
@@ -101,7 +101,7 @@ namespace M3
 
             String nationalid = nationalid1.Text;
 
-            SqlCommand blockProcedure = new SqlCommand(" blockFan", conn);
+            SqlCommand blockProcedure = new SqlCommand("blockFan", conn);
             blockProcedure.CommandType = CommandType.StoredProcedure;
             blockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
 
@@ -119,7 +119,7 @@ namespace M3
 
             String nationalid = nationalid1.Text;
 
-            SqlCommand unblockProcedure = new SqlCommand(" unblockFan", conn);
+            SqlCommand unblockProcedure = new SqlCommand("unblockFan", conn);
             unblockProcedure.CommandType = CommandType.StoredProcedure;
             unblockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
 

@@ -28,7 +28,7 @@ namespace M3
             String spassword = password3.Text;
            
 
-            SqlCommand addAssociationManagerProcedure = new SqlCommand(" addAssociationManager ", conn);
+            SqlCommand addAssociationManagerProcedure = new SqlCommand("addAssociationManager", conn);
             addAssociationManagerProcedure.CommandType = CommandType.StoredProcedure;
             addAssociationManagerProcedure.Parameters.Add(new SqlParameter("@name", sname));
             addAssociationManagerProcedure.Parameters.Add(new SqlParameter("@username", susername));
@@ -53,7 +53,7 @@ namespace M3
             DateTime endtime = DateTime.Parse(EndTime4.Text);
 
 
-            SqlCommand addnewmatchProcedure = new SqlCommand(" addNewMatch ", conn);
+            SqlCommand addnewmatchProcedure = new SqlCommand("addNewMatch", conn);
             addnewmatchProcedure.CommandType = CommandType.StoredProcedure;
             addnewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
             addnewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
@@ -77,7 +77,7 @@ namespace M3
             DateTime endtime = DateTime.Parse(EndTime4.Text);
 
 
-            SqlCommand deletenewmatchProcedure = new SqlCommand(" deleteMatch ", conn);
+            SqlCommand deletenewmatchProcedure = new SqlCommand("deleteMatch", conn);
             deletenewmatchProcedure.CommandType = CommandType.StoredProcedure;
             deletenewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
             deletenewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
@@ -100,7 +100,7 @@ namespace M3
             DateTime endtime = DateTime.Parse(EndTime4.Text);
 
 
-            SqlCommand upcomingmatchfunction= new SqlCommand(" upcomingMatchesOfClub ", conn);
+            SqlCommand upcomingmatchfunction= new SqlCommand("upcomingMatchesOfClub", conn);
             /*  upcomingmatchfunction.CommandType = CommandType.StoredProcedure;
               upcomingmatchfunction.Parameters.Add(new SqlParameter("@hostclub", hostname));
               upcomingmatchfunction.Parameters.Add(new SqlParameter("@guestclub", guestname));
