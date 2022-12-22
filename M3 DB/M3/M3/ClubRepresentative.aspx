@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ClubRepresentative.aspx.cs" Inherits="M3.ClubRepresentative" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClubRepresentative.aspx.cs" Inherits="M3.ClubRepresentative" %>
 
 <!DOCTYPE html>
 

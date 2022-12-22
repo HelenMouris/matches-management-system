@@ -17,7 +17,7 @@ namespace M3
 
         }
 
-        protected void addclub(object sender, EventArgs e)
+        protected void addClub(object sender, EventArgs e)
         {
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
@@ -55,7 +55,7 @@ namespace M3
             conn.Close();
         }
 
-        protected void AddStadium(object sender, EventArgs e)
+        protected void addStadium(object sender, EventArgs e)
         {
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);

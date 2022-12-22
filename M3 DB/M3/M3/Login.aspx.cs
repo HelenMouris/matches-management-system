@@ -22,7 +22,7 @@ namespace M3
             string connStr = WebConfigurationManager.ConnectionStrings["M3"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
 
-            String username = username.Text;
+            String user = username.Text;
             String pass = password.Text;
         }
     }

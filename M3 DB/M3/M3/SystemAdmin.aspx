@@ -100,7 +100,7 @@
             <asp:TextBox ID="clubLocation" runat="server" CssClass="auto-style2" style="z-index: 1"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="addclub" runat="server" CssClass="auto-style3" OnClick="addclub"  Style="z-index: 1" Text="Add Club" />
+            <asp:Button ID="addclub" runat="server" CssClass="auto-style3" OnClick="addClub"  Style="z-index: 1" Text="Add Club" />
             <br />
             <br />
             <br />
@@ -121,7 +121,7 @@
             <br />
             <br />
             Stadium location:<br />
-            <asp:TextBox ID="Stadiumlocation" runat="server" CssClass="auto-style8" OnTextChanged="TextBox2_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="Stadiumlocation" runat="server" CssClass="auto-style8" ></asp:TextBox>
             <br />
             <br />
             <br />
@@ -130,7 +130,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="AddStadium" runat="server" CssClass="auto-style10" OnClick="AddStadium" Style="z-index: 1" Text="AddStadium" />
+            <asp:Button ID="AddStadium" runat="server" CssClass="auto-style10" OnClick="addStadium" Style="z-index: 1" Text="AddStadium" />
             <br />
             <br />
             <br />
