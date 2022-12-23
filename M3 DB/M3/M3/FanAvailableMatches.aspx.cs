@@ -14,6 +14,12 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("Fan"))
+            {
+
+                Response.Redirect("Login.aspx");
+
+            }
 
         }
 

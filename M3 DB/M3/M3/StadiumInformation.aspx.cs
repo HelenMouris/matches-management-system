@@ -14,15 +14,26 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            SqlCommand cmd = new SqlCommand("SELECT s.ID , s.Name, s.Status , s.Location , s.Capacity From dbo.Stadium s INNER JOIN StadiumManager sm ON sm.Stadium = s.ID WHERE sm.username = @stadiumManagerName ", conn);
-            cmd.Parameters.AddWithValue("@stadiumManagerName", "shahdsharaf");
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            GridView1.DataSource = reader;
-            GridView1.DataBind();
-            conn.Close();
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("StadiumManager"))
+            {
+
+                Response.Redirect("Login.aspx");
+
+            }
+            else
+            {
+
+
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+                SqlCommand cmd = new SqlCommand("SELECT s.ID , s.Name, s.Status , s.Location , s.Capacity From dbo.Stadium s INNER JOIN StadiumManager sm ON sm.Stadium = s.ID WHERE sm.username = @stadiumManagerName ", conn);
+                cmd.Parameters.AddWithValue("@stadiumManagerName", Session["username"]);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                GridView1.DataSource = reader;
+                GridView1.DataBind();
+                conn.Close();
+            }
         }
     }
 }

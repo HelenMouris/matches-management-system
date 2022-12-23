@@ -16,7 +16,13 @@ namespace M3
         protected void Page_Load(object sender, EventArgs e)
         {
            
-
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("StadiumManager"))
+            {
+                
+                Response.Redirect("Login.aspx");
+                
+            }
+            
 
         }
         protected void stadiumInfo_Click(object sender, EventArgs e)
