@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClubRepAvailableStadiums.aspx" />
     <Content Include="ClubRepClubInfo.aspx" />
     <Content Include="ClubRepUpcomingMatches.aspx" />
     <Content Include="RegisterClubRepresentative.aspx" />
@@ -76,6 +77,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClubRepAvailableStadiums.aspx.cs">
+      <DependentUpon>ClubRepAvailableStadiums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubRepAvailableStadiums.aspx.designer.cs">
+      <DependentUpon>ClubRepAvailableStadiums.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClubRepClubInfo.aspx.cs">
       <DependentUpon>ClubRepClubInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
