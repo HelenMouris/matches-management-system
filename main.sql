@@ -1,4 +1,7 @@
-﻿CREATE PROCEDURE createAllTables   
+﻿create database m2
+use m2
+go
+CREATE PROCEDURE createAllTables   
 AS
 create table SystemUser(
 username varchar(20) ,

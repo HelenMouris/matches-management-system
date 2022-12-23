@@ -17,7 +17,7 @@ namespace M3
 
         }
 
-        protected void addClub(object sender, EventArgs e)
+       /* protected void addClub(object sender, EventArgs e)
         {
             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
             SqlConnection conn = new SqlConnection(connStr);
@@ -128,6 +128,36 @@ namespace M3
             conn.Open();
            unblockProcedure.ExecuteNonQuery();
             conn.Close();
+        }*/
+
+        protected void addclub_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddClub.aspx");  
+        }
+
+        protected void Deleteclub(object sender, EventArgs e)
+        {
+            Response.Redirect("DeleteClub.aspx");
+        }
+
+        protected void addstadium_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddStadium.aspx");
+        }
+
+        protected void deletestadium_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DeleteStadium.aspx");
+        }
+
+        protected void block_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("BlockFan.aspx");
+        }
+
+        protected void unblock_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UnblockFan.aspx");
         }
     }
 }
