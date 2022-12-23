@@ -11,7 +11,7 @@ namespace M3
 {
 
 
-    public partial class SportsAssociationManager
+    public partial class StadiumManager
     {
 
         /// <summary>
@@ -24,48 +24,39 @@ namespace M3
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// addMatch control.
+        /// stadiumInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addMatch;
+        protected global::System.Web.UI.WebControls.Button stadiumInfo;
 
         /// <summary>
-        /// deleteMatch control.
+        /// viewRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteMatch;
+        protected global::System.Web.UI.WebControls.Button viewRequests;
 
         /// <summary>
-        /// viewUpcomingMatches control.
+        /// acceptRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button viewUpcomingMatches;
+        protected global::System.Web.UI.WebControls.Button acceptRequest;
 
         /// <summary>
-        /// viewAlreadyPlayedMatches control.
+        /// rejectRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button viewAlreadyPlayedMatches;
-
-        /// <summary>
-        /// clubsNeverPlayed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clubsNeverPlayed;
+        protected global::System.Web.UI.WebControls.Button rejectRequest;
     }
 }
