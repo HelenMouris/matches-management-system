@@ -167,6 +167,13 @@
     <Compile Include="ClubRepClubInfo.aspx.designer.cs">
       <DependentUpon>ClubRepClubInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClubRepMaster.Master.cs">
+      <DependentUpon>ClubRepMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubRepMaster.Master.designer.cs">
+      <DependentUpon>ClubRepMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="ClubRepUpcomingMatches.aspx.cs">
       <DependentUpon>ClubRepUpcomingMatches.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -266,6 +273,20 @@
     <Compile Include="RegisterFan.aspx.designer.cs">
       <DependentUpon>RegisterFan.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LoginMaster.Master.cs">
+      <DependentUpon>LoginMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginMaster.Master.designer.cs">
+      <DependentUpon>LoginMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterMaster.Master.cs">
+      <DependentUpon>RegisterMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterMaster.Master.designer.cs">
+      <DependentUpon>RegisterMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="SportsAssociationManager.aspx.cs">
       <DependentUpon>SportsAssociationManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,7 +338,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClubRepMaster.Master" />
     <None Include="packages.config" />
+    <Content Include="LoginMaster.Master" />
+    <Content Include="RegisterMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

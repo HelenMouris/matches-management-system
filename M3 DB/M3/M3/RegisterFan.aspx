@@ -1,13 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegisterFan.aspx.cs" Inherits="M3.RegisterFan" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/RegisterMaster.Master" CodeBehind="RegisterFan.aspx.cs" Inherits="M3.RegisterFan" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="registerClubRep" ContentPlaceHolderID="registerClubRep" runat="server">
         <div>
             <div>
                 <asp:Label ID="nameLabel" runat="server" Text="Name"></asp:Label>
@@ -53,6 +47,4 @@
             </div>
             <asp:Button ID="addFan" runat="server" Text="Register" OnClick="addFanClick" />
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>

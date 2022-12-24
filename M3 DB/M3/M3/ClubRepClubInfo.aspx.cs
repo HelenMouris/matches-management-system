@@ -43,12 +43,8 @@ namespace M3
             {
                 clubLocation = rdr2.GetString(rdr2.GetOrdinal("Location"));
 
-                Label nameLabel = new Label();
-                nameLabel.Text =  "Name: " + clubName + "<br>";
-                Label locationLabel = new Label();
-                locationLabel.Text = "Location: " + clubLocation + "<br>";
-                form1.Controls.Add(nameLabel);
-                form1.Controls.Add(locationLabel);
+                clubInfoName.Text = "Name: " + clubName;
+                clubInfoLocation.Text = "Location: " + clubLocation;
             }
 
             conn.Close();
