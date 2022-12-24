@@ -73,7 +73,7 @@
                     <a href="/ClubRepClubInfo.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Club Info</a>
                     <a href="/ClubRepUpcomingMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Upcoming Matches</a>
                     <a href="/ClubRepAvailableStadiums.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Available Stadiums</a>
-                    <a href="/ClubRepClubInfo.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Add Host Request</a>
+                    <a href="/ClubRepSendRequest.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Add Host Request</a>
                 </div>
 
             </div>
@@ -92,6 +92,8 @@
                     <asp:ContentPlaceHolder ID="clubRepAvailableStadiums" runat="server">
                     </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="clubRepUpcomingMatches" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="clubRepSendRequest" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
             </div>

@@ -175,11 +175,6 @@ C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\bin\roslyn\VBCSCompi
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-<<<<<<< HEAD
-C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\obj\Debug\M3.csproj.AssemblyReference.cache
-C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\obj\Debug\M3.csproj.CoreCompileInputs.cache
-=======
->>>>>>> 9fb03b4ae802967b9a2e60af604db5c46b94abc4
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\obj\Debug\M3.csproj.CopyComplete
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\obj\Debug\M3.dll
 C:\Users\pc\Desktop\db project\database-project\M3 DB\M3\M3\obj\Debug\M3.pdb
