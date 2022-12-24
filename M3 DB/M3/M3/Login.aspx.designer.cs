@@ -15,13 +15,13 @@ namespace M3
     {
 
         /// <summary>
-        /// form1 control.
+        /// usernameLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label usernameLogin;
 
         /// <summary>
         /// username control.
@@ -31,6 +31,15 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox username;
+
+        /// <summary>
+        /// passwordLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label passwordLogin;
 
         /// <summary>
         /// password control.

@@ -1,18 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewRequests.aspx.cs" Inherits="M3.ViewRequests" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/StadiumManagerMaster.Master" CodeBehind="ViewRequests.aspx.cs" Inherits="M3.ViewRequests" %>
 
-<!DOCTYPE html>
+<asp:Content ID="stadiumManagerViewRequests" ContentPlaceHolderID="stadiumManagerViewRequests" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+        <div class="card" >
+            <div class="card-header bg-success text-center" style="color: white">
+                The Requests
+            </div>
+            <div class="card-body"> 
         <div>
-            <asp:GridView ID="GridView1" runat="server" Width="849px">
+            <asp:GridView ID="GridView1" runat="server" Width="1000px">
             </asp:GridView>
         </div>
+            </div>
+        </div>
+   
 
-    </form>
-</body>
-</html>
+</asp:Content>

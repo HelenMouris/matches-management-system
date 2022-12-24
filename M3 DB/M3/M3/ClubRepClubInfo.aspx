@@ -1,14 +1,19 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClubRepClubInfo.aspx.cs" Inherits="M3.ClubRepClubInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/ClubRepMaster.Master" CodeBehind="ClubRepClubInfo.aspx.cs" Inherits="M3.ClubRepClubInfo" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">      
-        
-    </form>
-</body>
-</html>
+<asp:Content ID="clubRepClubInfo" ContentPlaceHolderID="clubRepClubInfo" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color:white">
+                Club Information
+            </div>
+            <div class="card-body">
+                <div>
+                    <asp:Label ID="clubInfoName" runat="server" />
+                </div>
+                <div>
+                    <asp:Label ID="clubInfoLocation" runat="server" />
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>

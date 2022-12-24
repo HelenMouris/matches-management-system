@@ -1,14 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RejectRequests.aspx.cs" Inherits="M3.RejectRequests" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/StadiumManagerMaster.Master" CodeBehind="RejectRequests.aspx.cs" Inherits="M3.RejectRequests" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="stadiumManagerRejectRequest" ContentPlaceHolderID="stadiumManagerRejectRequest" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color: white">
+                Reject Request
+            </div>
+            <div class="card-body">
+    <div>
             <asp:Label ID="usernamelabel" runat="server" Text="Username:"></asp:Label>
         </div>
         <div>
@@ -35,6 +34,8 @@
         <div>
             <asp:Button ID="rejectRequest2" runat="server" Text="Reject Request" OnClick="rejectRequest2_Click" />
         </div>
-    </form>
-</body>
-</html>
+    </div>
+        </div>
+    </div>
+</asp:Content>
+

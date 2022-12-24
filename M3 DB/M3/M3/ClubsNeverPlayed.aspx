@@ -1,27 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClubsNeverPlayed.aspx.cs" Inherits="M3.ClubsNeverPlayed" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SportsAssocManagerMaster.Master" CodeBehind="ClubsNeverPlayed.aspx.cs" Inherits="M3.ClubsNeverPlayed" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 395px;
-            height: 133px;
-            position: absolute;
-            top: 15px;
-            left: 10px;
-            z-index: 1;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <asp:GridView ID="GridView1" runat="server" CssClass="auto-style1">
-            </asp:GridView>
+<asp:Content ID="sportsAssocManagerClubsNeverPlayed" ContentPlaceHolderID="sportsAssocManagerClubsNeverPlayed" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 40rem;">
+            <div class="card-header bg-success" style="color: white">
+                Clubs Never Played 
+            </div>
+            <div class="card-body">
+                <div>
+                    <asp:GridView ID="GridView1" runat="server" Width="600px"></asp:GridView>
+                </div>
+            </div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+
+</asp:Content>

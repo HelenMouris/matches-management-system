@@ -1,13 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddStadium.aspx.cs" Inherits="M3.AddStadium" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SystemAdminMaster.Master" CodeBehind="AddStadium.aspx.cs" Inherits="M3.AddStadium" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="systemAdminAddStadium" ContentPlaceHolderID="systemAdminAddStadium" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color: white">
+                Add Stadium
+            </div>
+            <div class="card-body">
         <div>
             <asp:Label ID="stadiumname" runat="server" Text="Stadium Name:"></asp:Label>
         </div>
@@ -29,6 +28,8 @@
         <div>
             <asp:Button ID="addStad" runat="server" Text="Add Stadium" OnClick="addStad_Click" />
         </div>
-    </form>
-</body>
-</html>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>
