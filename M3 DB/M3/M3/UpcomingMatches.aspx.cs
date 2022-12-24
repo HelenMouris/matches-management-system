@@ -14,15 +14,26 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            SqlCommand cmd = new SqlCommand("SELECT hc.Name as HostClub , gc.Name as GuestClub , StartTime , EndTime FROM dbo.Match m inner join dbo.Club hc on m.HostClub = hc.ID inner join dbo.Club gc on gc.ID = m.GuestClub  WHERE StartTime > CURRENT_TIMESTAMP", conn);
-           
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            GridView1.DataSource = reader;
-            GridView1.DataBind();
-            conn.Close();
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SportsAssociationManager"))
+            {
+
+                Response.Redirect("Login.aspx");
+
+            }
+            else
+            {
+
+
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+                SqlCommand cmd = new SqlCommand("SELECT hc.Name as HostClub , gc.Name as GuestClub , StartTime , EndTime FROM dbo.Match m inner join dbo.Club hc on m.HostClub = hc.ID inner join dbo.Club gc on gc.ID = m.GuestClub  WHERE StartTime > CURRENT_TIMESTAMP", conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                GridView1.DataSource = reader;
+                GridView1.DataBind();
+                conn.Close();
+            }
         }
     }
 }

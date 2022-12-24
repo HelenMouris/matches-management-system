@@ -77,8 +77,10 @@
     <Content Include="AddSportsAssociationManager.aspx" />
     <Content Include="AddStadiumManager.aspx" />
     <Content Include="AlreadyPlayedMatches.aspx" />
+    <Content Include="ClubRepSendRequest.aspx" />
     <Content Include="ClubRepUpcomingMatches.aspx" />
     <Content Include="FanAvailableMatches.aspx" />
+    <Content Include="FanPurchaseTicket.aspx" />
     <Content Include="RegisterClubRepresentative.aspx" />
     <Content Include="ClubsNeverPlayed.aspx" />
     <Content Include="DeleteMatch.aspx" />
@@ -167,6 +169,13 @@
     <Compile Include="ClubRepClubInfo.aspx.designer.cs">
       <DependentUpon>ClubRepClubInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClubRepSendRequest.aspx.cs">
+      <DependentUpon>ClubRepSendRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubRepSendRequest.aspx.designer.cs">
+      <DependentUpon>ClubRepSendRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClubRepMaster.Master.cs">
       <DependentUpon>ClubRepMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -187,6 +196,13 @@
     </Compile>
     <Compile Include="FanAvailableMatches.aspx.designer.cs">
       <DependentUpon>FanAvailableMatches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FanPurchaseTicket.aspx.cs">
+      <DependentUpon>FanPurchaseTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FanPurchaseTicket.aspx.designer.cs">
+      <DependentUpon>FanPurchaseTicket.aspx</DependentUpon>
     </Compile>
     <Compile Include="FanMaster.Master.cs">
       <DependentUpon>FanMaster.Master</DependentUpon>

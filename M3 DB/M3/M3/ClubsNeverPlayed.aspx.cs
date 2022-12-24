@@ -14,15 +14,26 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.clubsNeverMatched", conn);
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SportsAssociationManager"))
+            {
 
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            GridView1.DataSource = reader;
-            GridView1.DataBind();
-            conn.Close();
+                Response.Redirect("Login.aspx");
+
+            }
+            else
+            {
+
+
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.clubsNeverMatched", conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                GridView1.DataSource = reader;
+                GridView1.DataBind();
+                conn.Close();
+            }
         }
     }
 }

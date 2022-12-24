@@ -14,7 +14,12 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SportsAssociationManager"))
+            {
 
+                Response.Redirect("Login.aspx");
+
+            }
         }
 
         protected void addMatch2_Click(object sender, EventArgs e)
