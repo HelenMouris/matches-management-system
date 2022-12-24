@@ -11,88 +11,79 @@ namespace M3
 {
 
 
-    public partial class DeleteMatch
+    public partial class SystemAdminMaster
     {
 
         /// <summary>
-        /// hostclublabel control.
+        /// head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hostclublabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
-        /// hostClub control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hostClub;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// guestclublabel control.
+        /// systemAdminAddClub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label guestclublabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminAddClub;
 
         /// <summary>
-        /// guestClub control.
+        /// systemAdminDeleteClub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox guestClub;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminDeleteClub;
 
         /// <summary>
-        /// starttimelabel control.
+        /// systemAdminAddStadium control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label starttimelabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminAddStadium;
 
         /// <summary>
-        /// startTime control.
+        /// systemAdminDeleteStadium control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox startTime;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminDeleteStadium;
 
         /// <summary>
-        /// endtimelabel control.
+        /// systemAdminBlockFan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label endtimelabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminBlockFan;
 
         /// <summary>
-        /// endTime control.
+        /// systemAdminUnblockFan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox endTime;
-
-        /// <summary>
-        /// deleteMatch2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteMatch2;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder systemAdminUnblockFan;
     }
 }

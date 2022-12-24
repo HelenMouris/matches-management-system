@@ -1,13 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DeleteClub.aspx.cs" Inherits="M3.DeleteClub" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SystemAdminMaster.Master" CodeBehind="DeleteClub.aspx.cs" Inherits="M3.DeleteClub" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="systemAdminDeleteClub" ContentPlaceHolderID="systemAdminDeleteClub" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color: white">
+                Delete Club
+            </div>
+            <div class="card-body">
         <div>
             <asp:Label ID="clubname" runat="server" Text="Club Name:"></asp:Label>
         </div>
@@ -17,6 +16,8 @@
         <div>
             <asp:Button ID="deletec" runat="server" Text="Delete Club" OnClick="deletec_Click" />
         </div>
-    </form>
-</body>
-</html>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>

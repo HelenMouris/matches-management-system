@@ -188,6 +188,13 @@
     <Compile Include="FanAvailableMatches.aspx.designer.cs">
       <DependentUpon>FanAvailableMatches.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FanMaster.Master.cs">
+      <DependentUpon>FanMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FanMaster.Master.designer.cs">
+      <DependentUpon>FanMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="RegisterClubRepresentative.aspx.cs">
       <DependentUpon>RegisterClubRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,6 +301,13 @@
     <Compile Include="SportsAssociationManager.aspx.designer.cs">
       <DependentUpon>SportsAssociationManager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SportsAssocManagerMaster.Master.cs">
+      <DependentUpon>SportsAssocManagerMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SportsAssocManagerMaster.Master.designer.cs">
+      <DependentUpon>SportsAssocManagerMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="StadiumInformation.aspx.cs">
       <DependentUpon>StadiumInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -308,12 +322,26 @@
     <Compile Include="StadiumManager.aspx.designer.cs">
       <DependentUpon>StadiumManager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StadiumManagerMaster.Master.cs">
+      <DependentUpon>StadiumManagerMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StadiumManagerMaster.Master.designer.cs">
+      <DependentUpon>StadiumManagerMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="SystemAdmin.aspx.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SystemAdmin.aspx.designer.cs">
       <DependentUpon>SystemAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAdminMaster.Master.cs">
+      <DependentUpon>SystemAdminMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAdminMaster.Master.designer.cs">
+      <DependentUpon>SystemAdminMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="UpcomingMatches.aspx.cs">
       <DependentUpon>UpcomingMatches.aspx</DependentUpon>
@@ -339,9 +367,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClubRepMaster.Master" />
+    <Content Include="FanMaster.Master" />
     <None Include="packages.config" />
     <Content Include="LoginMaster.Master" />
     <Content Include="RegisterMaster.Master" />
+    <Content Include="StadiumManagerMaster.Master" />
+    <Content Include="SportsAssocManagerMaster.Master" />
+    <Content Include="SystemAdminMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -11,88 +11,70 @@ namespace M3
 {
 
 
-    public partial class DeleteMatch
+    public partial class SportsAssocManagerMaster
     {
 
         /// <summary>
-        /// hostclublabel control.
+        /// head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hostclublabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
-        /// hostClub control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hostClub;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// guestclublabel control.
+        /// sportsAssocManagerAddMatch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label guestclublabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder sportsAssocManagerAddMatch;
 
         /// <summary>
-        /// guestClub control.
+        /// sportsAssocManagerDeleteMatch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox guestClub;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder sportsAssocManagerDeleteMatch;
 
         /// <summary>
-        /// starttimelabel control.
+        /// sportsAssocManagerUpcomingMatches control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label starttimelabel;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder sportsAssocManagerUpcomingMatches;
 
         /// <summary>
-        /// startTime control.
+        /// sportsAssocManagerAlreadyPlayedMatches control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox startTime;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder sportsAssocManagerAlreadyPlayedMatches;
 
         /// <summary>
-        /// endtimelabel control.
+        /// sportsAssocManagerClubsNeverPlayed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label endtimelabel;
-
-        /// <summary>
-        /// endTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox endTime;
-
-        /// <summary>
-        /// deleteMatch2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button deleteMatch2;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder sportsAssocManagerClubsNeverPlayed;
     }
 }

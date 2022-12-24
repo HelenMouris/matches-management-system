@@ -1,14 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UnblockFan.aspx.cs" Inherits="M3.UnblockFan" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SystemAdminMaster.Master" CodeBehind="UnblockFan.aspx.cs" Inherits="M3.UnblockFan" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-       
+<asp:Content ID="systemAdminUnblockFan" ContentPlaceHolderID="systemAdminUnblockFan" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color: white">
+                Unblock Fan
+            </div>
+            <div class="card-body">
         <div>
             <asp:Label ID="nID" runat="server" Text="National ID:"></asp:Label>
         </div>
@@ -18,6 +16,8 @@
         <div>
             <asp:Button ID="unblockbutton" runat="server" Text="Unblock Fan" OnClick="unblockbutton_Click" />
         </div>
-    </form>
-</body>
-</html>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>

@@ -1,13 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DeleteMatch.aspx.cs" Inherits="M3.DeleteMatch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SportsAssocManagerMaster.Master" CodeBehind="DeleteMatch.aspx.cs" Inherits="M3.DeleteMatch" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="sportsAssocManagerDeleteMatch" ContentPlaceHolderID="sportsAssocManagerDeleteMatch" runat="server">
+    <div class="d-flex justify-content-center text-center mt-3">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header bg-success" style="color: white">
+                Delete Match
+            </div>
+            <div class="card-body">
         <div>
             <asp:Label ID="hostclublabel" runat="server" Text="Host Club"></asp:Label>
         </div>
@@ -35,6 +34,8 @@
         <div>
             <asp:Button ID="deleteMatch2" runat="server" Text="Delete Match" OnClick="deleteMatch2_Click" />
         </div>
-    </form>
-</body>
-</html>
+            </div>
+        </div>
+        </div>
+
+</asp:Content>
