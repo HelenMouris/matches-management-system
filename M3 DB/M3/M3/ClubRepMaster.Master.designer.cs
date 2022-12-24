@@ -58,5 +58,14 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder clubRepUpcomingMatches;
+
+        /// <summary>
+        /// clubRepSendRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder clubRepSendRequest;
     }
 }
