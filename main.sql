@@ -215,7 +215,7 @@ GO
 
 CREATE VIEW allMatches
 AS
-SELECT hc.Name as HostClub , gc.Name as GuestClub , StartTime
+SELECT hc.Name as HostClub , gc.Name as GuestClub , StartTime , EndTime
 FROM Match m inner join Club hc on m.HostClub = hc.ID inner join Club gc on gc.ID = m.GuestClub
 GO
 
@@ -619,3 +619,21 @@ where c.Name = @clubname and h.StadiumManager = @smId and h.Status = 'unhandled'
 return
 end
 go
+
+
+go 
+CREATE FUNCTION  managerStadiumInformation(@managerUsername varchar(20))  
+RETURNS TABLE  
+AS  
+RETURN (SELECT s.ID , s.Name, s.Status , s.Location , s.Capacity From Stadium s INNER JOIN
+StadiumManager sm ON sm.Stadium = s.ID WHERE sm.username = @managerUsername )
+GO
+
+go 
+CREATE FUNCTION  managerReceivedRequests(@managerUsername varchar(20))  
+RETURNS TABLE  
+AS  
+RETURN (SELECT cr.Name as ClubRepresentative,c2.Name as HostClub, c.Name as GuestClub, m.StartTime, m.EndTime, hr.status from HostRequest as hr inner join StadiumManager as sm on hr.StadiumManager = sm.ID inner join ClubRepresentative as cr on hr.ClubRepresentative = cr.ID inner join Match as m on hr.Match_ID = m.ID inner join Club as c on m.GuestClub = c.ID INNER JOIN 
+Club as c2 on m.HostClub = c2.ID where sm.username = @managerUsername )
+GO
+
