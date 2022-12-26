@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// clublabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label clublabel;
-
-        /// <summary>
         /// club control.
         /// </summary>
         /// <remarks>
@@ -33,15 +24,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox club;
 
         /// <summary>
-        /// stadiumlabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label stadiumlabel;
-
-        /// <summary>
         /// stadium control.
         /// </summary>
         /// <remarks>
@@ -49,15 +31,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox stadium;
-
-        /// <summary>
-        /// starttimelabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label starttimelabel;
 
         /// <summary>
         /// startTime control.

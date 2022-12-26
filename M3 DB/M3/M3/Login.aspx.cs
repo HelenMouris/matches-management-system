@@ -14,7 +14,8 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["username"] = null;
+            Session["isLoggedIn"] = null;
         }
 
         protected void login(object sender, EventArgs e)

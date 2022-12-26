@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// stadiumname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label stadiumname;
-
-        /// <summary>
         /// sname control.
         /// </summary>
         /// <remarks>
@@ -33,15 +24,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox sname;
 
         /// <summary>
-        /// stadiumloc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label stadiumloc;
-
-        /// <summary>
         /// slocation control.
         /// </summary>
         /// <remarks>
@@ -49,15 +31,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox slocation;
-
-        /// <summary>
-        /// stadiumcap control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label stadiumcap;
 
         /// <summary>
         /// scapacity control.

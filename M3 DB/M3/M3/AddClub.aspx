@@ -1,27 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/SystemAdminMaster.Master" CodeBehind="AddClub.aspx.cs" Inherits="M3.AddClub" %>
 
 <asp:Content ID="systemAdminAddClub" ContentPlaceHolderID="systemAdminAddClub" runat="server">
-    <div class="d-flex justify-content-center text-center mt-3">
-        <div class="card" style="width: 20rem;">
+    <div class="d-flex justify-content-center text-center m-3">
+        <div class="card" style="width: 30rem;">
             <div class="card-header bg-success" style="color: white">
                 Add Club
             </div>
             <div class="card-body">
-        <div>
-            <asp:Label ID="clubname" runat="server" Text="Club Name:"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="cname" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Label ID="clublocation" runat="server" Text="Club Location:"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="clocation" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Button ID="AddsClub" runat="server" Text="Add Club" OnClick="AddsClub_Click" />
-        </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="cname" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
+                    <label for="cname">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="clocation" runat="server" class="form-control" placeholder="Location"></asp:TextBox>
+                    <label for="clocation">Location</label>
+                </div>
+                <div>
+                    <asp:Button ID="AddsClub" runat="server" CssClass="btn btn-success" OnClick="AddsClub_Click" Text="Add" />
+                </div>
             </div>
         </div>
     </div>

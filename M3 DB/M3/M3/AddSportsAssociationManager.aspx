@@ -3,26 +3,37 @@
 
 <asp:Content ID="registerSam" ContentPlaceHolderID="registerSam" runat="server">
 
-    <div>
-        <asp:Label ID="namelabel" runat="server" Text="Name"></asp:Label>
+    <div class="card-header bg-success">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a id="sam" class="nav-link active" href="/AddSportsAssociationManager.aspx" style="color: #008443">Sports Association Manager</a>
+            </li>
+            <li class="nav-item">
+                <a id="clubRep" class="nav-link" href="/RegisterClubRepresentative.aspx" style="color: white">Club Representative</a>
+            </li>
+            <li class="nav-item">
+                <a id="stadiumMan" class="nav-link" href="/AddStadiumManager.aspx" style="color: white">Stadium Manager</a>
+            </li>
+            <li class="nav-item">
+                <a id="fan" class="nav-link" href="/RegisterFan.aspx" style="color: white">Fan</a>
+            </li>
+        </ul>
     </div>
-    <div>
-        <asp:TextBox ID="name" runat="server"></asp:TextBox>
+    <div class="card-body">
+        <div class="form-floating mb-3">
+            <asp:TextBox ID="name" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
+            <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <asp:TextBox ID="username" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+            <asp:TextBox ID="password" runat="server" class="form-control" placeholder="Password"></asp:TextBox>
+            <label for="password">Password</label>
+        </div>
+        <div>
+            <asp:Button ID="addAssociationManager" runat="server" CssClass="btn btn-success" OnClick="addAssociationManager_Click" Text="Register" />
+        </div>
     </div>
-    <div>
-        <asp:Label ID="usernamelabel" runat="server" Text="Username"></asp:Label>
-    </div>
-    <div>
-        <asp:TextBox ID="username" runat="server"></asp:TextBox>
-    </div>
-    <div>
-        <asp:Label ID="passwordlabel" runat="server" Text="Password"></asp:Label>
-    </div>
-    <div>
-        <asp:TextBox ID="password" runat="server"></asp:TextBox>
-    </div>
-    <div>
-        <asp:Button ID="addAssociationManager" runat="server" Text="Add Sports Association Manager" OnClick="addAssociationManager_Click" />
-    </div>
-
 </asp:Content>

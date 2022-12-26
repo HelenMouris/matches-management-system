@@ -7,11 +7,17 @@ using System.Web.UI.WebControls;
 
 namespace M3
 {
-    public partial class FanMaster : System.Web.UI.MasterPage
+    public partial class Fan : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            sidebarHeading.Text = "Hello " + Session["username"];
+            if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("Fan"))
+            {
+
+                Response.Redirect("Login.aspx");
+
+            }
+
         }
     }
 }

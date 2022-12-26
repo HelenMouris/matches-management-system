@@ -67,12 +67,14 @@
     <form id="form1" runat="server">
         <div class="d-flex" id="wrapper">
             <div class="bg-dark border-light" id="sidebar-wrapper">
-                <div class="sidebar-heading">RashiCode</div>
+                <div class="sidebar-heading">
+                    <asp:Label id="sidebarHeading" runat="server" style="color: white"></asp:Label>
+                </div>
                 <div class="list-group list-group-flush">
-                    <a href="/FanAvailableMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Available Tickets For a Match</a>
-                    <a href="/FanPurchaseTicket.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Purchase Ticket</a>
-
-
+                    <a href="/Fan.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-house m-2"></i>Home</a>
+                    <a href="/FanAvailableMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-calendar-days m-2"></i>Available Matches</a>
+                    <a href="/FanPurchaseTicket.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-ticket m-2"></i>Purchase Ticket</a>
+                    <a href="/Login.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-right-from-bracket m-2"></i>Log out</a>
                 </div>
 
             </div>
@@ -86,11 +88,12 @@
                 </nav>
 
                 <div class="container body-content">
+                    <asp:ContentPlaceHolder ID="fan" runat="server">
+                    </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="fanAvailableMatches" runat="server">
                     </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="fanPurchaseTicket" runat="server">
                     </asp:ContentPlaceHolder>
- 
                 </div>
             </div>
         </div>

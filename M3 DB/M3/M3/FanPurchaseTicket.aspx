@@ -7,33 +7,25 @@
                 Purchase Tickets
             </div>
             <div class="card-body">
-        <div>
-            <asp:Label ID="nationidlabel" runat="server" Text="National ID Number"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="nationalID" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Label ID="hostclublabel" runat="server" Text="Host Club"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="hostClub" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Label ID="guestclublabel" runat="server" Text="Guest Club"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="guestClub" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Label ID="starttimelabel" runat="server" Text="Start Time"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="startTime" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Button ID="purchaseTicket" runat="server" Text="Purchase Ticket" OnClick="purchaseTicket_Click" />
-        </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="nationalID" runat="server" class="form-control" placeholder="National Id"></asp:TextBox>
+                    <label for="nationalID">National Id</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="hostClub" runat="server" class="form-control" placeholder="Host Club"></asp:TextBox>
+                    <label for="hostClub">Host Club</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="guestClub" runat="server" class="form-control" placeholder="Guest Club"></asp:TextBox>
+                    <label for="guestClub">Guest Club</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="startTime" runat="server" class="form-control" placeholder="Start Time"></asp:TextBox>
+                    <label for="startTime">Start Time</label>
+                </div>
+                <div>
+                    <asp:Button ID="purchaseTicket" runat="server" CssClass="btn btn-success" Text="Purchase Ticket" OnClick="purchaseTicket_Click" />
+                </div>
             </div>
         </div>
     </div>

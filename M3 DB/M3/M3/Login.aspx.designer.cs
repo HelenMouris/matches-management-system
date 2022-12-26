@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// usernameLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usernameLogin;
-
-        /// <summary>
         /// username control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox username;
-
-        /// <summary>
-        /// passwordLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passwordLogin;
 
         /// <summary>
         /// password control.

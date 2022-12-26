@@ -2,7 +2,7 @@
 
 <asp:Content ID="clubRepClubInfo" ContentPlaceHolderID="clubRepClubInfo" runat="server">
     <div class="d-flex justify-content-center text-center mt-3">
-        <div class="card" style="width: 20rem;">
+        <div class="card" style="width: 30rem;">
             <div class="card-header bg-success" style="color:white">
                 Club Information
             </div>
