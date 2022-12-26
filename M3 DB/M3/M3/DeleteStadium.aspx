@@ -2,21 +2,19 @@
 
 
 <asp:Content ID="systemAdminDeleteStadium" ContentPlaceHolderID="systemAdminDeleteStadium" runat="server">
-    <div class="d-flex justify-content-center text-center mt-3">
-        <div class="card" style="width: 20rem;">
+    <div class="d-flex justify-content-center text-center m-3">
+        <div class="card" style="width: 30rem;">
             <div class="card-header bg-success" style="color: white">
                 Delete Stadium
             </div>
             <div class="card-body">
-        <div>
-            <asp:Label ID="stadiumname" runat="server" Text="Stadium Name:"></asp:Label>
-        </div>
-        <div>
-            <asp:TextBox ID="stadname" runat="server"></asp:TextBox>
-        </div>
-        <div>
-            <asp:Button ID="sname" runat="server" Text="Delete Stadium" OnClick="sname_Click" />
-        </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="stadname" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
+                    <label for="stadname">Name</label>
+                </div>
+                <div>
+                    <asp:Button ID="deletes" runat="server" CssClass="btn btn-danger" OnClick="sname_Click" Text="Delete" />
+                </div>
             </div>
         </div>
     </div>

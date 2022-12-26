@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// clubname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label clubname;
-
-        /// <summary>
         /// cname control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox cname;
-
-        /// <summary>
-        /// clublocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label clublocation;
 
         /// <summary>
         /// clocation control.

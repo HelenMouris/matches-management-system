@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// usernamelabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usernamelabel;
-
-        /// <summary>
         /// username control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox username;
-
-        /// <summary>
-        /// hostclublabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hostclublabel;
 
         /// <summary>
         /// hostClub control.
@@ -51,15 +33,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox hostClub;
 
         /// <summary>
-        /// guestclublabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label guestclublabel;
-
-        /// <summary>
         /// guestClub control.
         /// </summary>
         /// <remarks>
@@ -67,15 +40,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox guestClub;
-
-        /// <summary>
-        /// starttimelabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label starttimelabel;
 
         /// <summary>
         /// startTime control.
