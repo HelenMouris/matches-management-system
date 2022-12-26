@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// namelabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label namelabel;
-
-        /// <summary>
         /// name control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox name;
-
-        /// <summary>
-        /// usernamelabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usernamelabel;
 
         /// <summary>
         /// username control.
@@ -51,15 +33,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox username;
 
         /// <summary>
-        /// passwordlabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passwordlabel;
-
-        /// <summary>
         /// password control.
         /// </summary>
         /// <remarks>
@@ -67,15 +40,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox password;
-
-        /// <summary>
-        /// stadiumlabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label stadiumlabel;
 
         /// <summary>
         /// stadium control.

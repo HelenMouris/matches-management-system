@@ -67,15 +67,18 @@
     <form id="form1" runat="server">
         <div class="d-flex" id="wrapper">
             <div class="bg-dark border-light" id="sidebar-wrapper">
-                <div class="sidebar-heading">RashiCode</div>
+                <div class="sidebar-heading">
+                    <asp:Label id="sidebarHeading" runat="server" style="color: white"></asp:Label>
+                </div>
                 <div class="list-group list-group-flush">
-                    <a href="/AddClub.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Add Club</a>
-                    <a href="/DeleteClub.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Delete Club</a>
-                    <a href="/AddStadium.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Add Stadium</a>
-                    <a href="/DeleteStadium.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Delete Stadium</a>
-                    <a href="/BlockFan.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Block Fan</a>
-                    <a href="/UnblockFan.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Unblock Fan</a>
-
+                    <a href="/SystemAdmin.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-house m-2"></i>Home</a>
+                    <a href="/AddClub.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-plus m-2"></i>Add Club</a>
+                    <a href="/DeleteClub.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-trash m-2"></i>Delete Club</a>
+                    <a href="/AddStadium.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-plus m-2"></i>Add Stadium</a>
+                    <a href="/DeleteStadium.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-trash m-2"></i>Delete Stadium</a>
+                    <a href="/BlockFan.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-ban m-2"></i>Block Fan</a>
+                    <a href="/UnblockFan.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-circle-check m-2"></i>Unblock Fan</a>
+                    <a href="/Login.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-right-from-bracket m-2"></i>Log out</a>
                 </div>
 
             </div>
@@ -89,6 +92,8 @@
                 </nav>
 
                 <div class="container body-content">
+                    <asp:ContentPlaceHolder ID="systemAdmin" runat="server">
+                    </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="systemAdminAddClub" runat="server">
                     </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="systemAdminDeleteClub" runat="server">

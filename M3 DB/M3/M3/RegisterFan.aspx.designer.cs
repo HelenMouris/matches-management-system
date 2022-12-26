@@ -15,15 +15,6 @@ namespace M3
     {
 
         /// <summary>
-        /// nameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nameLabel;
-
-        /// <summary>
         /// name control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox name;
-
-        /// <summary>
-        /// usernameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usernameLabel;
 
         /// <summary>
         /// username control.
@@ -51,15 +33,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox username;
 
         /// <summary>
-        /// passwordLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passwordLabel;
-
-        /// <summary>
         /// password control.
         /// </summary>
         /// <remarks>
@@ -67,15 +40,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox password;
-
-        /// <summary>
-        /// nationalIdLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nationalIdLabel;
 
         /// <summary>
         /// nationalId control.
@@ -87,15 +51,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox nationalId;
 
         /// <summary>
-        /// phoneLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label phoneLabel;
-
-        /// <summary>
         /// phone control.
         /// </summary>
         /// <remarks>
@@ -105,15 +60,6 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox phone;
 
         /// <summary>
-        /// birthDateLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label birthDateLabel;
-
-        /// <summary>
         /// birthDate control.
         /// </summary>
         /// <remarks>
@@ -121,15 +67,6 @@ namespace M3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox birthDate;
-
-        /// <summary>
-        /// addressLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label addressLabel;
 
         /// <summary>
         /// address control.

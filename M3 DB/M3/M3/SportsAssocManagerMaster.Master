@@ -67,14 +67,17 @@
     <form id="form1" runat="server">
         <div class="d-flex" id="wrapper">
             <div class="bg-dark border-light" id="sidebar-wrapper">
-                <div class="sidebar-heading">RashiCode</div>
+                <div class="sidebar-heading">
+                    <asp:Label id="sidebarHeading" runat="server" style="color: white"></asp:Label>
+                </div>
                 <div class="list-group list-group-flush">
-                    <a href="/AddMatch.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Add Match</a>
-                    <a href="/DeleteMatch.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Delete Match</a>
-                    <a href="/UpcomingMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Upcoming Matches</a>
-                    <a href="/AlreadyPlayedMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Already Played Matches</a>
-                    <a href="/ClubsNeverPlayed.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white">Clubs Never Played</a>
-
+                    <a href="/SportsAssociationManager.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-house m-2"></i>Home</a>
+                    <a href="/AddMatch.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-plus m-2"></i>Add Match</a>
+                    <a href="/DeleteMatch.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-trash m-2"></i>Delete Match</a>
+                    <a href="/UpcomingMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-calendar-days m-2"></i>Upcoming Matches</a>
+                    <a href="/AlreadyPlayedMatches.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-clock-rotate-left m-2"></i>Already Played Matches</a>
+                    <a href="/ClubsNeverPlayed.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-x m-2"></i>Clubs Never Played</a>
+                    <a href="/Login.aspx" class="list-group-item list-group-item-action bg-dark" style="color: white"><i class="fa-solid fa-right-from-bracket m-2"></i>Log out</a>
                 </div>
 
             </div>
@@ -88,6 +91,8 @@
                 </nav>
 
                 <div class="container body-content">
+                    <asp:ContentPlaceHolder ID="sportsAssocManager" runat="server">
+                    </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="sportsAssocManagerAddMatch" runat="server">
                     </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="sportsAssocManagerDeleteMatch" runat="server">
