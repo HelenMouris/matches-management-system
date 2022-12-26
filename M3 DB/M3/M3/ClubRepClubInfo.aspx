@@ -7,11 +7,16 @@
                 Club Information
             </div>
             <div class="card-body">
-                <div>
-                    <asp:Label ID="clubInfoName" runat="server" />
-                </div>
-                <div>
-                    <asp:Label ID="clubInfoLocation" runat="server" />
+                <div class="form-group">
+                    <div class="table-responsive">
+                        <asp:GridView ID="GridView1" Width="100%"
+                            CssClass="table table-bordered table-condensed table-responsive"
+                            runat="server">
+                            <HeaderStyle BackColor="#212529" Font-Bold="true" ForeColor="White" />
+                            <AlternatingRowStyle BackColor="White" />
+                            <RowStyle BackColor="#f5f5f5" />
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
         </div>

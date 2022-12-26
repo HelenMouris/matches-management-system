@@ -501,14 +501,20 @@ insert into SystemUser Values (@username, @password)
 insert into Fan(Name, NationalID, BirthDate, Address, Phone, username) VALUES (@name, @nationalId, @birthDate, @address, @phone, @username)
 GO
 
-CREATE FUNCTION  upcomingMatchesOfClub(@clubName varchar(20))  
-RETURNS TABLE  
+CREATE FUNCTION  upcomingMatchesOfClub(@username varchar(20))  
+RETURNS @res TABLE (hostClub varchar(20), guestClub varchar(20), startTime datetime, stadium varchar(20)) 
 AS  
-RETURN (SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as stadium
+begin
+Declare @clubName varchar(20)
+set @clubName = (Select c.Name from Club c inner join ClubRepresentative cr on c.ID = cr.Club where cr.username = @username)
+insert into @res
+SELECT hc.Name as hostClub, gc.Name as guestClub, m.StartTime, s.Name as stadium
 from Club hc inner join Match m on hc.ID = m.HostClub 
 inner join Club gc on gc.ID = m.GuestClub
 left outer join  Stadium s on m.Stadium = s.ID
-where (hc.Name = @clubName OR gc.Name = @clubName) AND m.StartTime > CURRENT_TIMESTAMP)
+where (hc.Name = @clubName OR gc.Name = @clubName) AND m.StartTime > CURRENT_TIMESTAMP
+return
+end
 GO
 
 CREATE FUNCTION  availableMatchesToAttend(@date datetime)  
@@ -637,3 +643,9 @@ RETURN (SELECT cr.Name as ClubRepresentative,c2.Name as HostClub, c.Name as Gues
 Club as c2 on m.HostClub = c2.ID where sm.username = @managerUsername )
 GO
 
+CREATE FUNCTION  clubRepClubInformation(@clubRepUsername varchar(20))  
+RETURNS TABLE  
+AS  
+RETURN (SELECT c.ID , c.Name, c.Location From Club c INNER JOIN
+ClubRepresentative cr on cr.Club = c.ID WHERE cr.username = @clubRepUsername )
+GO
