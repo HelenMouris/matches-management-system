@@ -26,8 +26,8 @@ namespace M3
 
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
-                SqlCommand cmd = new SqlCommand("SELECT s.ID , s.Name, s.Status , s.Location , s.Capacity From dbo.Stadium s INNER JOIN StadiumManager sm ON sm.Stadium = s.ID WHERE sm.username = @stadiumManagerName ", conn);
-                cmd.Parameters.AddWithValue("@stadiumManagerName", Session["username"]);
+                SqlCommand cmd = new SqlCommand("select * from dbo.managerStadiumInformation(@managerUsername)", conn);
+                cmd.Parameters.AddWithValue("@managerUsername", Session["username"]);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 GridView1.DataSource = reader;
