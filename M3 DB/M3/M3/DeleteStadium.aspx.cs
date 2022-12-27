@@ -25,22 +25,30 @@ namespace M3
 
         protected void sname_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            String sName = stadname.Text;
+                String sName = stadname.Text;
 
-            SqlCommand deletestadiumProcedure = new SqlCommand("deleteStadium", conn);
-            deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
-            deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
+                SqlCommand deletestadiumProcedure = new SqlCommand("deleteStadium", conn);
+                deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
+                deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
 
 
 
-            conn.Open();
-            deletestadiumProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                deletestadiumProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("SystemAdmin.aspx");
+                Response.Redirect("SystemAdmin.aspx");
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
+
         }
     }
 }

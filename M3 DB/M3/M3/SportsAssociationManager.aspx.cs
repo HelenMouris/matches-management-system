@@ -24,29 +24,6 @@ namespace M3
 
         }
 
-        protected void addMatch_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AddMatch.aspx");
-        }
-
-        protected void deleteMatch_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("DeleteMatch.aspx");
-        }
-
-        protected void viewUpcomingMatches_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("UpcomingMatches.aspx");
-        }
-
-        protected void viewAlreadyPlayedMatches_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AlreadyPlayedMatches.aspx");
-        }
-
-        protected void clubsNeverPlayed_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("ClubsNeverPlayed.aspx");
-        }
+        
     } 
 }

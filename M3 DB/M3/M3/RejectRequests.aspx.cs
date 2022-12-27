@@ -24,27 +24,35 @@ namespace M3
 
         protected void rejectRequest2_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            String user = username.Text;
-            String hostname = hostClub.Text;
-            String guestname = guestClub.Text;
-            DateTime starttime = DateTime.Parse(startTime.Text);
+                String user = username.Text;
+                String hostname = hostClub.Text;
+                String guestname = guestClub.Text;
+                DateTime starttime = DateTime.Parse(startTime.Text);
 
 
-            SqlCommand rejectRequestProcedure = new SqlCommand("rejectRequest", conn);
-            rejectRequestProcedure.CommandType = CommandType.StoredProcedure;
-            rejectRequestProcedure.Parameters.Add(new SqlParameter("@stadiumManagerUserName", user));
-            rejectRequestProcedure.Parameters.Add(new SqlParameter("@hostClubName", hostname));
-            rejectRequestProcedure.Parameters.Add(new SqlParameter("@guestClubName", guestname));
-            rejectRequestProcedure.Parameters.Add(new SqlParameter("@startTime", starttime));
+                SqlCommand rejectRequestProcedure = new SqlCommand("rejectRequest", conn);
+                rejectRequestProcedure.CommandType = CommandType.StoredProcedure;
+                rejectRequestProcedure.Parameters.Add(new SqlParameter("@stadiumManagerUserName", user));
+                rejectRequestProcedure.Parameters.Add(new SqlParameter("@hostClubName", hostname));
+                rejectRequestProcedure.Parameters.Add(new SqlParameter("@guestClubName", guestname));
+                rejectRequestProcedure.Parameters.Add(new SqlParameter("@startTime", starttime));
 
-            conn.Open();
-            rejectRequestProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                rejectRequestProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("StadiumManager.aspx");
+                Response.Redirect("StadiumManager.aspx");   
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
+
         }
     }
 }
