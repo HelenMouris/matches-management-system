@@ -7,24 +7,22 @@
                 Purchase Tickets
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="nationalID" runat="server" class="form-control" placeholder="National Id"></asp:TextBox>
-                    <label for="nationalID">National Id</label>
+                <div class="dropdown show mb-3">
+                    <asp:DropDownList ID="HostClubList" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="">Select Host Club</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <div class="dropdown show mb-3">
+                    <asp:DropDownList ID="GuestClubList" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="">Select Guest Club</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
                 <div class="form-floating mb-3">
-                    <asp:TextBox ID="hostClub" runat="server" class="form-control" placeholder="Host Club"></asp:TextBox>
-                    <label for="hostClub">Host Club</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="guestClub" runat="server" class="form-control" placeholder="Guest Club"></asp:TextBox>
-                    <label for="guestClub">Guest Club</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="startTime" runat="server" class="form-control" placeholder="Start Time"></asp:TextBox>
+                    <asp:TextBox ID="startTime" runat="server" textmode="DateTimeLocal" class="form-control" placeholder="Start Time"></asp:TextBox>
                     <label for="startTime">Start Time</label>
                 </div>
                 <div>
-                    <asp:Button ID="purchaseTicket" runat="server" CssClass="btn btn-success" Text="Purchase Ticket" OnClick="purchaseTicket_Click" />
+                    <asp:Button ID="purchaseTicket" runat="server" CssClass="btn btn-outline-success" Text="Purchase" OnClick="purchaseTicket_Click" />
                 </div>
             </div>
         </div>

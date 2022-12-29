@@ -7,12 +7,13 @@
                 Delete Club
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="cname" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
-                    <label for="cname">Name</label>
+                <div class="dropdown show mb-3">
+                    <asp:DropDownList ID="ClubList" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="">Select Club</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
                 <div>
-                    <asp:Button ID="deletec" runat="server" CssClass="btn btn-danger" OnClick="deletec_Click" Text="Delete" />
+                    <asp:Button ID="deletec" runat="server" CssClass="btn btn-outline-danger" OnClick="deletec_Click" Text="Delete" />
                 </div>
             </div>
         </div>

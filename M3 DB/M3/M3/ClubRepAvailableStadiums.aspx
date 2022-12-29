@@ -9,12 +9,14 @@
             </div>
             <div class="card-body">
                 <div class=" d-flex row">
-                    <div class="form-floating mb-3 col-6">
-                        <asp:TextBox ID="date" runat="server" class="form-control" placeholder="Date"></asp:TextBox>
-                        <label for="date">Date</label>
-                    </div>
-                    <div class="col-6">
-                        <asp:Button ID="search" runat="server" Text="Search" CssClass="btn btn-outline-success" OnClick="searchStadiums" />
+                    <div class="mb-3">
+                        <label for="date" class="mb-3" style="text-align:left !important">Please choose a Date</label>
+                        <div class="input-group">
+                            <asp:TextBox ID="date" runat="server" TextMode="DateTimeLocal" class="form-control" placeholder="Date"></asp:TextBox>
+                            <span class="input-group-btn m-2">
+                                <asp:Button ID="search" runat="server" Text="Search" CssClass="btn btn-outline-success" OnClick="searchStadiums" />
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

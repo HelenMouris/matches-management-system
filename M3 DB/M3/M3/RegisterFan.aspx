@@ -40,7 +40,7 @@
             <label for="phone">Phone Number</label>
         </div>
         <div class="form-floating mb-3">
-            <asp:TextBox ID="birthDate" runat="server" class="form-control" placeholder="Birthdate"></asp:TextBox>
+            <asp:TextBox ID="birthDate" runat="server" textmode="DateTimeLocal" class="form-control" placeholder="Birthdate"></asp:TextBox>
             <label for="birthDate">Birthdate</label>
         </div>
         <div class="form-floating mb-3">

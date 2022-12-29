@@ -20,6 +20,23 @@ namespace M3
                 Response.Redirect("Login.aspx");
 
             }
+            else
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+
+                conn.Open();
+                var sql = String.Format("select * from dbo.allCLubs");
+                SqlCommand allClubs = new SqlCommand(sql, conn);
+                SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                    ListItem l = new ListItem(current, current);
+                    ClubList.Items.Add(l);
+                }
+                conn.Close();
+            }
         }
 
         protected void deletec_Click(object sender, EventArgs e)
@@ -29,7 +46,7 @@ namespace M3
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-                String cName = cname.Text;
+            String cName = ClubList.SelectedValue;
 
 
                 SqlCommand deleteClubProcedure = new SqlCommand("deleteClub", conn);

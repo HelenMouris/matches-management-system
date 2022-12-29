@@ -32,9 +32,10 @@
             <asp:TextBox ID="password" runat="server" class="form-control" placeholder="Password"></asp:TextBox>
             <label for="password">Password</label>
         </div>
-        <div class="form-floating mb-3">
-            <asp:TextBox ID="stadium" runat="server" class="form-control" placeholder="Stadium"></asp:TextBox>
-            <label for="stadium">Stadium</label>
+        <div class="dropdown show mb-3">
+            <asp:DropDownList ID="StadiumList" runat="server" CssClass="form-control">
+                <asp:ListItem Value="">Select Stadium</asp:ListItem>
+            </asp:DropDownList>
         </div>
         <div>
             <asp:Button ID="addManager" runat="server" CssClass="btn btn-success" OnClick="addManager_Click" Text="Register" />

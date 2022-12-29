@@ -12,7 +12,7 @@
                     <label for="natID">National Id</label>
                 </div>
                 <div>
-                    <asp:Button ID="blockbutton" runat="server" CssClass="btn btn-danger" OnClick="blockbutton_Click" Text="Block" />
+                    <asp:Button ID="blockbutton" runat="server" CssClass="btn btn-outline-danger" OnClick="blockbutton_Click" Text="Block" />
                 </div>
             </div>
         </div>

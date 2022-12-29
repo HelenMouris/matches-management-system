@@ -20,6 +20,23 @@ namespace M3
                 Response.Redirect("Login.aspx");
 
             }
+            else
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+
+                conn.Open();
+                var sql = String.Format("select * from dbo.allStadiums");
+                SqlCommand allStadiums = new SqlCommand(sql, conn);
+                SqlDataReader rdr = allStadiums.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                    ListItem l = new ListItem(current, current);
+                    StadiumList.Items.Add(l);
+                }
+                conn.Close();
+            }
 
         }
 
@@ -30,13 +47,11 @@ namespace M3
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-                String sName = stadname.Text;
+            String sName = StadiumList.SelectedValue;
 
-                SqlCommand deletestadiumProcedure = new SqlCommand("deleteStadium", conn);
-                deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
-                deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
-
-
+            SqlCommand deletestadiumProcedure = new SqlCommand("deleteStadium", conn);
+            deletestadiumProcedure.CommandType = CommandType.StoredProcedure;
+            deletestadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
 
                 conn.Open();
                 deletestadiumProcedure.ExecuteNonQuery();

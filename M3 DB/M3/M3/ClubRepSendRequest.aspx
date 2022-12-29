@@ -7,20 +7,17 @@
                 Send Host Request
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="club" runat="server" class="form-control" placeholder="Club you are Representing"></asp:TextBox>
-                    <label for="club">Club you are Representing</label>
+                <div class="dropdown show mb-3">
+                    <asp:DropDownList ID="StadiumList" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="">Select Stadium</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
                 <div class="form-floating mb-3">
-                    <asp:TextBox ID="stadium" runat="server" class="form-control" placeholder="Stadium"></asp:TextBox>
-                    <label for="stadium">Stadium</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="startTime" runat="server" class="form-control" placeholder="Start Time"></asp:TextBox>
+                    <asp:TextBox ID="startTime" runat="server" textmode="DateTimeLocal" class="form-control" placeholder="Start Time"></asp:TextBox>
                     <label for="startTime">Start Time</label>
                 </div>
                 <div>
-                    <asp:Button ID="sendRequest" runat="server" CssClass="btn btn-success" OnClick="sendRequest_Click" Text="Send" />
+                    <asp:Button ID="sendRequest" runat="server" CssClass="btn btn-outline-success" OnClick="sendRequest_Click" Text="Send" />
                 </div>
             </div>
         </div>

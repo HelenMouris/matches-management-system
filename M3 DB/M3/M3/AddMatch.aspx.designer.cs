@@ -15,22 +15,22 @@ namespace M3
     {
 
         /// <summary>
-        /// hostClub control.
+        /// HostClubList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hostClub;
+        protected global::System.Web.UI.WebControls.DropDownList HostClubList;
 
         /// <summary>
-        /// guestClub control.
+        /// GuestClubList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox guestClub;
+        protected global::System.Web.UI.WebControls.DropDownList GuestClubList;
 
         /// <summary>
         /// startTime control.

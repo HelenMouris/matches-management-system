@@ -12,6 +12,8 @@ namespace M3
 {
     public partial class UnblockFan : System.Web.UI.Page
     {
+        List<string> blockedFans = new List<string>();
+        List<string> unblockedFans = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SystemAdmin"))
@@ -20,8 +22,30 @@ namespace M3
                 Response.Redirect("Login.aspx");
 
             }
-        
+            else
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+
+                conn.Open();
+                var sql = String.Format("select * from dbo.allFans");
+                SqlCommand allFans = new SqlCommand(sql, conn);
+                SqlDataReader rdr = allFans.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    if (rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                    {
+                        unblockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
+                    }
+                    else if (!rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                    {
+                        blockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
+                    }
+                }
+                conn.Close();
             }
+
+        }
 
         protected void unblockbutton_Click(object sender, EventArgs e)
         {
@@ -30,13 +54,20 @@ namespace M3
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-                String nationalid = natID.Text;
-
+            String nationalid = natID.Text;
+            if (!blockedFans.Contains(nationalid) && !unblockedFans.Contains(nationalid))
+            {
+                Response.Write("<script>alert('fan not found')</script>");
+            }
+            else if (unblockedFans.Contains(nationalid))
+            {
+                Response.Write("<script>alert('fan is already unblocked')</script>");
+            }
+            else
+            {
                 SqlCommand unblockProcedure = new SqlCommand("unblockFan", conn);
                 unblockProcedure.CommandType = CommandType.StoredProcedure;
                 unblockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
-
-
 
                 conn.Open();
                 unblockProcedure.ExecuteNonQuery();

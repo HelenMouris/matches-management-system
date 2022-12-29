@@ -15,22 +15,13 @@ namespace M3
     {
 
         /// <summary>
-        /// club control.
+        /// StadiumList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox club;
-
-        /// <summary>
-        /// stadium control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox stadium;
+        protected global::System.Web.UI.WebControls.DropDownList StadiumList;
 
         /// <summary>
         /// startTime control.

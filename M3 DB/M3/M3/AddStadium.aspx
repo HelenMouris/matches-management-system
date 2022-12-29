@@ -20,7 +20,7 @@
                     <label for="scapacity">Capacity</label>
                 </div>
                 <div>
-                    <asp:Button ID="addStad" runat="server" CssClass="btn btn-success" OnClick="addStad_Click" Text="Add" />
+                    <asp:Button ID="addStad" runat="server" CssClass="btn btn-outline-success" OnClick="addStad_Click" Text="Add" />
                 </div>
             </div>
         </div>
