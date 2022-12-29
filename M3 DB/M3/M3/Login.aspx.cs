@@ -99,7 +99,7 @@ namespace M3
                 else
                     if (resultF != null)
                 {
-                    if (blockedFans.Contains(user)
+                    if (blockedFans.Contains(user))
                     {
                         Response.Write("<script>alert('fan is blocked')</script>");
                     }
