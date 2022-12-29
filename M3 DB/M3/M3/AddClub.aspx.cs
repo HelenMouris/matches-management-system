@@ -24,22 +24,29 @@ namespace M3
 
         protected void AddsClub_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            String cName = cname.Text;
-            String cLocation = clocation.Text;
+                String cName = cname.Text;
+                String cLocation = clocation.Text;
 
-            SqlCommand addClubProcedure = new SqlCommand("addClub", conn);
-            addClubProcedure.CommandType = CommandType.StoredProcedure;
-            addClubProcedure.Parameters.Add(new SqlParameter("@name", cName));
-            addClubProcedure.Parameters.Add(new SqlParameter("@location", cLocation));
+                SqlCommand addClubProcedure = new SqlCommand("addClub", conn);
+                addClubProcedure.CommandType = CommandType.StoredProcedure;
+                addClubProcedure.Parameters.Add(new SqlParameter("@name", cName));
+                addClubProcedure.Parameters.Add(new SqlParameter("@location", cLocation));
 
-            conn.Open();
-            addClubProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                addClubProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("SystemAdmin.aspx");
+                Response.Redirect("SystemAdmin.aspx");
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
         }
     }
 }

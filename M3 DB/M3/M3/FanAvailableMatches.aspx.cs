@@ -25,17 +25,24 @@ namespace M3
 
         protected void searchMatches(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            conn.Open();
-            var sql = String.Format("select * from availableMatchesToAttend(@datetime)");
-            SqlCommand availableMatches = new SqlCommand(sql, conn);
-            availableMatches.Parameters.Add(new SqlParameter("@datetime", DateTime.Parse(date.Text)));
-            SqlDataReader rdr = availableMatches.ExecuteReader(CommandBehavior.CloseConnection);
-            GridView1.DataSource = rdr;
-            GridView1.DataBind();
-            conn.Close();
+                conn.Open();
+                var sql = String.Format("select * from availableMatchesToAttend(@datetime)");
+                SqlCommand availableMatches = new SqlCommand(sql, conn);
+                availableMatches.Parameters.Add(new SqlParameter("@datetime", DateTime.Parse(date.Text)));
+                SqlDataReader rdr = availableMatches.ExecuteReader(CommandBehavior.CloseConnection);
+                GridView1.DataSource = rdr;
+                GridView1.DataBind();
+                conn.Close();
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
         }
     }
 }

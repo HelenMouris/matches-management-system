@@ -40,8 +40,10 @@ namespace M3
 
         protected void addMatch2_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
             String hostname = HostClubList.SelectedValue;
             String guestname = GuestClubList.SelectedValue;
@@ -49,18 +51,23 @@ namespace M3
             DateTime endtime = DateTime.Parse(endTime.Text);
 
 
-            SqlCommand addnewmatchProcedure = new SqlCommand("addNewMatch", conn);
-            addnewmatchProcedure.CommandType = CommandType.StoredProcedure;
-            addnewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
-            addnewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
-            addnewmatchProcedure.Parameters.Add(new SqlParameter("@starttime", starttime));
-            addnewmatchProcedure.Parameters.Add(new SqlParameter("@endtime", endtime));
+                SqlCommand addnewmatchProcedure = new SqlCommand("addNewMatch", conn);
+                addnewmatchProcedure.CommandType = CommandType.StoredProcedure;
+                addnewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
+                addnewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
+                addnewmatchProcedure.Parameters.Add(new SqlParameter("@starttime", starttime));
+                addnewmatchProcedure.Parameters.Add(new SqlParameter("@endtime", endtime));
 
-            conn.Open();
-            addnewmatchProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                addnewmatchProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("SportsAssociationManager.aspx");
+                Response.Redirect("SportsAssociationManager.aspx");
+            }
+             catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
         }
 
     }

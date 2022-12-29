@@ -34,8 +34,10 @@ namespace M3
 
         protected void addManager_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
             String sname = name.Text;
             String susername = username.Text;
@@ -43,21 +45,27 @@ namespace M3
             String stadiumname = StadiumList.SelectedValue;
 
 
-            SqlCommand addStadiumManagerProcedure = new SqlCommand("addStadiumManager", conn);
-            addStadiumManagerProcedure.CommandType = CommandType.StoredProcedure;
-            addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@name", sname));
-            addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@username", susername));
-            addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@password", spassword));
-            addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@staduimname", stadiumname));
+                SqlCommand addStadiumManagerProcedure = new SqlCommand("addStadiumManager", conn);
+                addStadiumManagerProcedure.CommandType = CommandType.StoredProcedure;
+                addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@name", sname));
+                addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@username", susername));
+                addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@password", spassword));
+                addStadiumManagerProcedure.Parameters.Add(new SqlParameter("@staduimname", stadiumname));
 
 
 
 
-            conn.Open();
-            addStadiumManagerProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                addStadiumManagerProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("StadiumManager.aspx");
+                Response.Redirect("StadiumManager.aspx");
+            }
+            
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
         }
     }
 }

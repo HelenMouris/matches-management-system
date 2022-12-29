@@ -25,25 +25,33 @@ namespace M3
 
         protected void addStad_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            String sName = sname.Text;
-            String sLocation = slocation.Text;
-            String sCapacity = scapacity.Text;
+                String sName = sname.Text;
+                String sLocation = slocation.Text;
+                String sCapacity = scapacity.Text;
 
-            SqlCommand addstadiumProcedure = new SqlCommand("addStadium", conn);
-            addstadiumProcedure.CommandType = CommandType.StoredProcedure;
-            addstadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
-            addstadiumProcedure.Parameters.Add(new SqlParameter("@location", sLocation));
-            addstadiumProcedure.Parameters.Add(new SqlParameter("@capacity", sCapacity));
+                SqlCommand addstadiumProcedure = new SqlCommand("addStadium", conn);
+                addstadiumProcedure.CommandType = CommandType.StoredProcedure;
+                addstadiumProcedure.Parameters.Add(new SqlParameter("@name", sName));
+                addstadiumProcedure.Parameters.Add(new SqlParameter("@location", sLocation));
+                addstadiumProcedure.Parameters.Add(new SqlParameter("@capacity", sCapacity));
 
 
-            conn.Open();
-            addstadiumProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                addstadiumProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("SystemAdmin.aspx");
+                Response.Redirect("SystemAdmin.aspx");
+            }
+            catch(Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
+            
         }
     }
 }

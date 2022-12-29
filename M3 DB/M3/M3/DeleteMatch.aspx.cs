@@ -39,8 +39,10 @@ namespace M3
 
         protected void deleteMatch2_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
             String hostname = HostClubList.SelectedValue;
             String guestname = GuestClubList.SelectedValue;
@@ -55,9 +57,15 @@ namespace M3
             deletenewmatchProcedure.Parameters.Add(new SqlParameter("@starttime", starttime));
             deletenewmatchProcedure.Parameters.Add(new SqlParameter("@endtime", endtime));
 
-            conn.Open();
-            deletenewmatchProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                deletenewmatchProcedure.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
+
 
         }
     }

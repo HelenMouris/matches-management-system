@@ -20,69 +20,76 @@ namespace M3
 
         protected void login(object sender, EventArgs e)
         {
-             string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-             SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            String user = username.Text;
-            String pass = password.Text;
-           
-            
-              SqlCommand allAssocManagers = new SqlCommand("Select * from allAssocManagers where username = @username", conn);
-              SqlCommand allClubRepresentatives = new SqlCommand("Select * from allClubRepresentatives where username = @username", conn);
-              SqlCommand allStadiumManagers = new SqlCommand("Select * from allStadiumManagers where username = @username", conn);
-              SqlCommand allFans = new SqlCommand("Select * from allFans where username = @username", conn);  
+                String user = username.Text;
+                String pass = password.Text;
 
-             allAssocManagers.Parameters.AddWithValue("@username", user);
-              allClubRepresentatives.Parameters.AddWithValue("@username", user);
-              allStadiumManagers.Parameters.AddWithValue("@username", user);
-              allFans.Parameters.AddWithValue("@username", user);
-            conn.Open();
-                
-            var resultAM = allAssocManagers.ExecuteScalar();
-            var resultCR = allClubRepresentatives.ExecuteScalar();
-            var resultSM = allStadiumManagers.ExecuteScalar();
-            var resultF = allFans.ExecuteScalar();
 
-            if(user.Equals("admin") && pass.Equals("admin"))
-            {
-                Session["username"] = user;
-                Session["isLoggedIn"] = "SystemAdmin";
-                Response.Redirect("SystemAdmin.aspx");
-            }
+                SqlCommand allAssocManagers = new SqlCommand("Select * from allAssocManagers where username = @username", conn);
+                SqlCommand allClubRepresentatives = new SqlCommand("Select * from allClubRepresentatives where username = @username", conn);
+                SqlCommand allStadiumManagers = new SqlCommand("Select * from allStadiumManagers where username = @username", conn);
+                SqlCommand allFans = new SqlCommand("Select * from allFans where username = @username", conn);
 
-            if (resultAM != null)
-            {
-                Session["username"] = user;
-                Session["isLoggedIn"] = "SportsAssociationManager";
-                Response.Redirect("SportsAssociationManager.aspx");
-                
+                allAssocManagers.Parameters.AddWithValue("@username", user);
+                allClubRepresentatives.Parameters.AddWithValue("@username", user);
+                allStadiumManagers.Parameters.AddWithValue("@username", user);
+                allFans.Parameters.AddWithValue("@username", user);
+                conn.Open();
+
+                var resultAM = allAssocManagers.ExecuteScalar();
+                var resultCR = allClubRepresentatives.ExecuteScalar();
+                var resultSM = allStadiumManagers.ExecuteScalar();
+                var resultF = allFans.ExecuteScalar();
+
+                if (user.Equals("admin") && pass.Equals("admin"))
+                {
+                    Session["username"] = user;
+                    Session["isLoggedIn"] = "SystemAdmin";
+                    Response.Redirect("SystemAdmin.aspx");
+                }
+
+                if (resultAM != null)
+                {
+                    Session["username"] = user;
+                    Session["isLoggedIn"] = "SportsAssociationManager";
+                    Response.Redirect("SportsAssociationManager.aspx");
+
+                }
+                else
+                    if (resultCR != null)
+                {
+                    Session["username"] = user;
+                    Session["isLoggedIn"] = "ClubRepresentative";
+                    Response.Redirect("ClubRepresentative.aspx");
+                }
+                else
+                    if (resultSM != null)
+                {
+                    Session["username"] = user;
+                    Session["isLoggedIn"] = "StadiumManager";
+                    Response.Redirect("StadiumManager.aspx");
+                }
+                else
+                    if (resultF != null)
+                {
+                    Session["username"] = user;
+                    Session["isLoggedIn"] = "Fan";
+                    Response.Redirect("Fan.aspx");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Username or password incorrect or doesnt exist')</script>");
+                }
+                conn.Close();
             }
-            else
-                if (resultCR != null)
+            catch (Exception exception)
             {
-                Session["username"] = user;
-                Session["isLoggedIn"] = "ClubRepresentative";
-                Response.Redirect("ClubRepresentative.aspx");
+                Response.Write("<script>alert('please enter valid data')</script>");
             }
-            else
-                if (resultSM != null)
-            {
-                Session["username"] = user;
-                Session["isLoggedIn"] = "StadiumManager";
-                Response.Redirect("StadiumManager.aspx");
-            }
-            else
-                if (resultF != null)
-            {
-                Session["username"] = user;
-                Session["isLoggedIn"] = "Fan";
-                Response.Redirect("Fan.aspx");
-            }
-            else
-            {
-                Response.Write("<script>alert('Username or password incorrect or doesnt exist')</script>");
-            }
-            conn.Close();
 
         }
     }

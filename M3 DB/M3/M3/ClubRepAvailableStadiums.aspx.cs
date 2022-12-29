@@ -24,18 +24,26 @@ namespace M3
 
         protected void searchStadiums(object sender, EventArgs e)
         {
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+                string startDate = date.Text;
 
-            conn.Open();
-            var sql = String.Format("select * from viewAvailableStadiumsOn(@datetime)");
-            SqlCommand availableStadiums = new SqlCommand(sql, conn);
-            availableStadiums.Parameters.Add(new SqlParameter("@datetime", DateTime.Parse(date.Text)));
-            SqlDataReader rdr = availableStadiums.ExecuteReader(CommandBehavior.CloseConnection);
-            GridView1.DataSource = rdr;
-            GridView1.DataBind();
-            conn.Close();
+                conn.Open();
+                var sql = String.Format("select * from viewAvailableStadiumsOn(@datetime)");
+                SqlCommand availableStadiums = new SqlCommand(sql, conn);
+                availableStadiums.Parameters.Add(new SqlParameter("@datetime", startDate));
+                SqlDataReader rdr = availableStadiums.ExecuteReader(CommandBehavior.CloseConnection);
+                GridView1.DataSource = rdr;
+                GridView1.DataBind();
+                conn.Close();
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
 
         }
     }

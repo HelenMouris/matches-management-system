@@ -41,22 +41,30 @@ namespace M3
 
         protected void deletec_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
             String cName = ClubList.SelectedValue;
 
 
-            SqlCommand deleteClubProcedure = new SqlCommand("deleteClub", conn);
-            deleteClubProcedure.CommandType = CommandType.StoredProcedure;
-            deleteClubProcedure.Parameters.Add(new SqlParameter("@clubname", cName));
+                SqlCommand deleteClubProcedure = new SqlCommand("deleteClub", conn);
+                deleteClubProcedure.CommandType = CommandType.StoredProcedure;
+                deleteClubProcedure.Parameters.Add(new SqlParameter("@clubname", cName));
 
 
-            conn.Open();
-            deleteClubProcedure.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                deleteClubProcedure.ExecuteNonQuery();
+                conn.Close();
 
-            Response.Redirect("SystemAdmin.aspx");
+                Response.Redirect("SystemAdmin.aspx");
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
+
         }
     }
 }

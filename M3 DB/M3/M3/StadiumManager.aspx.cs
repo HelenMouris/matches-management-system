@@ -25,26 +25,6 @@ namespace M3
             
 
         }
-        protected void stadiumInfo_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("StadiumInformation.aspx");
-        }
-
-        protected void viewRequests_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("ViewRequests.aspx");
-            
-        }
-
-        protected void acceptRequest_Click(object sender, EventArgs e)
-        {
-             Response.Redirect("AcceptRequests.aspx");
-        }
-
-        protected void rejectRequest_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("RejectRequests.aspx");
-        }
 
        
     }

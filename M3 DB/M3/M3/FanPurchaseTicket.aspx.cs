@@ -50,27 +50,34 @@ namespace M3
 
         protected void purchaseTicket_Click(object sender, EventArgs e)
         {
-            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-            SqlConnection conn = new SqlConnection(connStr);
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
 
             String nationalIDNumber = fanNationalId;
             String hostname = HostClubList.SelectedValue;
             String guestname = GuestClubList.SelectedValue;
             DateTime starttime = DateTime.Parse(startTime.Text);
 
-            SqlCommand purchaseTicketProcedure = new SqlCommand("purchaseTicket", conn);
-            purchaseTicketProcedure.CommandType = CommandType.StoredProcedure;
-            purchaseTicketProcedure.Parameters.Add(new SqlParameter("@nationalId", nationalIDNumber));
-            purchaseTicketProcedure.Parameters.Add(new SqlParameter("@hostClubName", hostname));
-            purchaseTicketProcedure.Parameters.Add(new SqlParameter("@guestClubName", guestname));
-            purchaseTicketProcedure.Parameters.Add(new SqlParameter("@startTime", starttime));
-   
+                SqlCommand purchaseTicketProcedure = new SqlCommand("purchaseTicket", conn);
+                purchaseTicketProcedure.CommandType = CommandType.StoredProcedure;
+                purchaseTicketProcedure.Parameters.Add(new SqlParameter("@nationalId", nationalIDNumber));
+                purchaseTicketProcedure.Parameters.Add(new SqlParameter("@hostClubName", hostname));
+                purchaseTicketProcedure.Parameters.Add(new SqlParameter("@guestClubName", guestname));
+                purchaseTicketProcedure.Parameters.Add(new SqlParameter("@startTime", starttime));
 
-            conn.Open();
-            purchaseTicketProcedure.ExecuteNonQuery();
-            conn.Close();
 
-            Response.Redirect("Fan.aspx");
+                conn.Open();
+                purchaseTicketProcedure.ExecuteNonQuery();
+                conn.Close();
+
+                Response.Redirect("Fan.aspx");
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('please enter valid data')</script>");
+            }
 
         }
     }
