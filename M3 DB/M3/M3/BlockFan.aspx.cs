@@ -22,25 +22,32 @@ namespace M3
             }
             else
             {
-                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-                SqlConnection conn = new SqlConnection(connStr);
-
-                conn.Open();
-                var sql = String.Format("select * from dbo.allFans");
-                SqlCommand allFans = new SqlCommand(sql, conn);
-                SqlDataReader rdr = allFans.ExecuteReader(CommandBehavior.CloseConnection);
-                while (rdr.Read())
+                try
                 {
-                    if (rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                    string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                    SqlConnection conn = new SqlConnection(connStr);
+
+                    conn.Open();
+                    var sql = String.Format("select * from dbo.allFans");
+                    SqlCommand allFans = new SqlCommand(sql, conn);
+                    SqlDataReader rdr = allFans.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (rdr.Read())
                     {
-                        unblockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
+                        if (rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                        {
+                            unblockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
+                        }
+                        else if (!rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                        {
+                            blockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
+                        }
                     }
-                    else if (!rdr.GetBoolean(rdr.GetOrdinal("Status")))
-                    {
-                        blockedFans.Add(rdr.GetString(rdr.GetOrdinal("NationalID")));
-                    }
+                    conn.Close();
                 }
-                conn.Close();
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('Couldn't get available fans')</script>");
+                }
             }
 
         }
@@ -52,28 +59,32 @@ namespace M3
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-            String nationalid = natID.Text;
-            if (!blockedFans.Contains(nationalid) && !unblockedFans.Contains(nationalid))
-            {
-                Response.Write("<script>alert('fan not found')</script>");
-            } 
-            else if (blockedFans.Contains(nationalid))
-            {
-                Response.Write("<script>alert('fan is already blocked')</script>");
-            }
-            else
-            {
-                SqlCommand blockProcedure = new SqlCommand("blockFan", conn);
-                blockProcedure.CommandType = CommandType.StoredProcedure;
-                blockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
+                String nationalid = natID.Text;
+                if (string.IsNullOrWhiteSpace(natID.Text))
+                {
+                    Response.Write("<script>alert('all fields are required')</script>");
+                }
+                if (!blockedFans.Contains(nationalid) && !unblockedFans.Contains(nationalid))
+                {
+                    Response.Write("<script>alert('fan not found')</script>");
+                }
+                else if (blockedFans.Contains(nationalid))
+                {
+                    Response.Write("<script>alert('fan is already blocked')</script>");
+                }
+                else
+                {
+                    SqlCommand blockProcedure = new SqlCommand("blockFan", conn);
+                    blockProcedure.CommandType = CommandType.StoredProcedure;
+                    blockProcedure.Parameters.Add(new SqlParameter("@nationalid", nationalid));
 
-                conn.Open();
-                blockProcedure.ExecuteNonQuery();
-                conn.Close();
+                    conn.Open();
+                    blockProcedure.ExecuteNonQuery();
+                    conn.Close();
 
-                Response.Redirect("SystemAdmin.aspx");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('blocked sucessfully');window.location ='SystemAdmin.aspx';", true);
+                }
             }
-           
             catch (Exception exception)
             {
                 Response.Write("<script>alert('please enter valid data')</script>");

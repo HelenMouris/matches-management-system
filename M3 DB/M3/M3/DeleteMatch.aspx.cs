@@ -11,6 +11,7 @@ namespace M3
 {
     public partial class DeleteMatch : System.Web.UI.Page
     {
+        List<int> matches = new List<int>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SportsAssociationManager"))
@@ -41,32 +42,73 @@ namespace M3
         {
             try
             {
-                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-                SqlConnection conn = new SqlConnection(connStr);
-
-            String hostname = HostClubList.SelectedValue;
-            String guestname = GuestClubList.SelectedValue;
-            DateTime starttime = DateTime.Parse(startTime.Text);
-            DateTime endtime = DateTime.Parse(endTime.Text);
-
-
-            SqlCommand deletenewmatchProcedure = new SqlCommand("deleteMatch", conn);
-            deletenewmatchProcedure.CommandType = CommandType.StoredProcedure;
-            deletenewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
-            deletenewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
-            deletenewmatchProcedure.Parameters.Add(new SqlParameter("@starttime", starttime));
-            deletenewmatchProcedure.Parameters.Add(new SqlParameter("@endtime", endtime));
-
-                conn.Open();
-                deletenewmatchProcedure.ExecuteNonQuery();
-                conn.Close();
+                deleteMatch2Helper(sender, e);
             }
             catch (Exception exception)
             {
-                Response.Write("<script>alert('please enter valid data')</script>");
+                Response.Write("<script>alert('" + exception.Message + "')</script>");
             }
 
 
+        }
+
+        protected void deleteMatch2Helper(object sender, EventArgs e)
+        {
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+
+                if (string.IsNullOrWhiteSpace(HostClubList.SelectedValue) || string.IsNullOrWhiteSpace(GuestClubList.SelectedValue)
+                    || string.IsNullOrWhiteSpace(startTime.Text) || string.IsNullOrWhiteSpace(endTime.Text)
+                    || HostClubList.SelectedValue.Equals("Select Club") || GuestClubList.SelectedValue.Equals("Select Club"))
+                    throw new Exception("all fields are required");
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("select * from dbo.getMatch(@host, @guest, @start, @end)", conn);
+                cmd.Parameters.AddWithValue("@host", HostClubList.SelectedValue);
+                cmd.Parameters.AddWithValue("@guest", GuestClubList.SelectedValue);
+                cmd.Parameters.AddWithValue("@start", DateTime.Parse(startTime.Text));
+                cmd.Parameters.AddWithValue("@end", DateTime.Parse(endTime.Text));
+                SqlDataReader rdr2 = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr2.Read())
+                {
+                    matches.Add(rdr2.GetInt32(rdr2.GetOrdinal("ID")));
+                }
+                conn.Close();
+
+                if (matches.Count == 0)
+                    throw new Exception("match not found");
+                try
+                {
+
+                    String hostname = HostClubList.SelectedValue;
+                    String guestname = GuestClubList.SelectedValue;
+                    DateTime starttime = DateTime.Parse(startTime.Text);
+                    DateTime endtime = DateTime.Parse(endTime.Text);
+
+                    SqlCommand deletenewmatchProcedure = new SqlCommand("deleteMatch", conn);
+                    deletenewmatchProcedure.CommandType = CommandType.StoredProcedure;
+                    deletenewmatchProcedure.Parameters.Add(new SqlParameter("@hostclub", hostname));
+                    deletenewmatchProcedure.Parameters.Add(new SqlParameter("@guestclub", guestname));
+                    deletenewmatchProcedure.Parameters.Add(new SqlParameter("@start", starttime));
+                    deletenewmatchProcedure.Parameters.Add(new SqlParameter("@end", endtime));
+
+                    conn.Open();
+                    deletenewmatchProcedure.ExecuteNonQuery();
+                    conn.Close();
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('deleted successfully');window.location ='SportsAssociationManager.aspx';", true);
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception("deletion failed");
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("match not found");
+            }
         }
     }
 }

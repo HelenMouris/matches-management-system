@@ -30,7 +30,7 @@ create table StadiumManager(
 username varchar(20), 
 ID int IDENTITY,
 Name varchar(20),
-Stadium int,
+Stadium int UNIQUE,
 Primary Key(ID),
 Foreign Key(username) references SystemUser(username) on DELETE  Cascade on UPDATE  Cascade,
 Foreign Key(Stadium) references Stadium(ID) on DELETE Cascade on UPDATE Cascade
@@ -41,7 +41,7 @@ username varchar(20),
 ID int IDENTITY,
 Name varchar(20),
 Primary Key(ID),
-Club int,
+Club int UNIQUE,
 Foreign Key(username) references SystemUser(username) on DELETE Cascade on UPDATE Cascade,
 Foreign Key(Club) references Club(ID) on DELETE Cascade on UPDATE Cascade 
 
@@ -120,7 +120,8 @@ Foreign Key(StadiumManager) references StadiumManager(ID) on DELETE NO ACTION on
 Foreign Key(Match_ID) references Match(ID) on DELETE NO ACTION on UPDATE NO ACTION
 )
 GO
-
+EXEC createAllTables
+go
 CREATE PROCEDURE dropAllTables
 AS
 drop table HostRequest , Ticket , Match , ClubRepresentative , StadiumManager, Club , Stadium , SystemAdmin , SportsAssociationManager , Fan , SystemUser
@@ -278,7 +279,9 @@ go
 
 CREATE PROCEDURE deleteMatch 
 @hostclub varchar(20),
-@guestclub varchar(20)
+@guestclub varchar(20),
+@start datetime,
+@end datetime
 AS
 BEGIN
 DECLARE @idhost int
@@ -287,7 +290,7 @@ DECLARE @matchid int
 
 set @idhost = (select id from club where name = @hostclub)
 set @idguest = (select id from club where name = @guestclub)
-set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest)
+set @matchid =(select id from match where HostClub = @idhost AND GuestClub = @idguest and StartTime = @start and EndTime = @end)
 	
 delete from HostRequest where Match_ID = @matchid
 delete from match where HostClub = @idhost AND guestClub = @idguest;
@@ -343,9 +346,9 @@ GO
 create procedure addStadium
 @name varchar(20),
 @location varchar(20),
-@capcity INTEGER
+@capacity INTEGER
 AS
-insert into Stadium (Name,Location,Capacity) values (@name,@location,@capcity)
+insert into Stadium (Name,Location,Capacity) values (@name,@location,@capacity)
 Go
 
 create procedure deleteStadium
@@ -667,4 +670,30 @@ CREATE FUNCTION  nationalIdFromUsername(@fanUsername varchar(20))
 RETURNS TABLE  
 AS  
 RETURN (SELECT f.NationalId From Fan f WHERE f.username = @fanUsername )
+GO
+
+CREATE FUNCTION  getMatch(@host varchar(20), @guest varchar(20), @start datetime, @end datetime)  
+RETURNS TABLE  
+AS  
+RETURN (SELECT m.ID From Match m inner join Club hc on m.HostClub = hc.ID inner join Club gc on gc.ID = m.GuestClub where m.StartTime = @start
+and m.EndTime = @end and hc.Name = @host and gc.Name = @guest)
+GO
+
+CREATE FUNCTION  getMatch2(@host varchar(20), @start datetime)  
+RETURNS TABLE  
+AS  
+RETURN (SELECT m.ID From Match m inner join Club hc on m.HostClub = hc.ID  where m.StartTime = @start and hc.Name = @host)
+GO
+
+CREATE FUNCTION  isAlreadyPlaying(@host varchar(20), @guest varchar(20), @start datetime, @end datetime)  
+RETURNS TABLE  
+AS  
+RETURN (SELECT m.ID From Match m inner join Club hc on m.HostClub = hc.ID inner join Club gc on gc.ID = m.GuestClub
+where ((@start >= m.StartTime and @start <= m.EndTime) or (@end >= m.StartTime and @end <= m.EndTime)) and ((hc.Name = @host or gc.Name = @host) or (hc.Name = @guest or gc.Name = @guest)))
+GO
+
+CREATE FUNCTION  getRequest(@host varchar(20),@guest varchar(20), @start datetime)  
+RETURNS TABLE  
+AS  
+RETURN (SELECT h.ID From HostRequest h inner join Match m on m.ID = h.Match_ID inner join Club hc on m.HostClub = hc.ID inner join Club gc on m.GuestClub = gc.ID  where m.StartTime = @start and hc.Name = @host and gc.Name = @guest)
 GO

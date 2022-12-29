@@ -17,6 +17,10 @@ namespace M3
                 Response.Redirect("Login.aspx");
 
             }
+            else
+            {
+                name.Text = "Username: " + Session["username"].ToString();
+            }
 
         }
     }

@@ -13,9 +13,11 @@ namespace M3
         {
             if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("ClubRepresentative"))
             {
-
                 Response.Redirect("Login.aspx");
-
+            }
+            else
+            {
+                name.Text = "Username: " + Session["username"].ToString();
             }
         }
     }

@@ -26,6 +26,22 @@ namespace M3
         {
             try
             {
+                AddsClubHelper(sender, e);
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('" + exception.Message + "')</script>");
+            }
+        }
+
+        protected void AddsClubHelper(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cname.Text) || string.IsNullOrWhiteSpace(clocation.Text))
+                throw new Exception("all fields are required");
+            if (cname.Text.Length > 20 || clocation.Text.Length > 20)
+                throw new Exception("maximum string length is 20");
+            try
+            {
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
@@ -41,11 +57,11 @@ namespace M3
                 addClubProcedure.ExecuteNonQuery();
                 conn.Close();
 
-                Response.Redirect("SystemAdmin.aspx");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('added sucessfully');window.location ='SystemAdmin.aspx';", true);
             }
             catch (Exception exception)
             {
-                Response.Write("<script>alert('please enter valid data')</script>");
+                throw new Exception("insertion failed");
             }
         }
     }

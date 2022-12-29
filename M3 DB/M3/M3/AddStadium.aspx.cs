@@ -27,12 +27,29 @@ namespace M3
         {
             try
             {
+                addStadHelper(sender, e);
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('" + exception.Message + "')</script>");
+            }
+
+        }
+
+        protected void addStadHelper(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(sname.Text) || string.IsNullOrWhiteSpace(slocation.Text) || string.IsNullOrWhiteSpace(scapacity.Text))
+                throw new Exception("all fields are required");
+            if (sname.Text.Length > 20 || slocation.Text.Length > 20)
+                throw new Exception("maximum string length is 20");
+            try
+            {
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
                 String sName = sname.Text;
                 String sLocation = slocation.Text;
-                String sCapacity = scapacity.Text;
+                int sCapacity = Int16.Parse(scapacity.Text);
 
                 SqlCommand addstadiumProcedure = new SqlCommand("addStadium", conn);
                 addstadiumProcedure.CommandType = CommandType.StoredProcedure;
@@ -45,13 +62,16 @@ namespace M3
                 addstadiumProcedure.ExecuteNonQuery();
                 conn.Close();
 
-                Response.Redirect("SystemAdmin.aspx");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('added sucessfully');window.location ='SystemAdmin.aspx';", true);
             }
-            catch(Exception exception)
+            catch (FormatException exception)
             {
-                Response.Write("<script>alert('please enter valid data')</script>");
+                throw new Exception("invalid data");
             }
-            
+            catch (Exception exception)
+            {
+                throw new Exception("insertion failed");
+            }
         }
     }
 }

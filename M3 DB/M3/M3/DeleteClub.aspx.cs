@@ -16,26 +16,35 @@ namespace M3
         {
             if (Session["isLoggedIn"] == null || !(Session["isLoggedIn"].ToString()).Equals("SystemAdmin"))
             {
-
                 Response.Redirect("Login.aspx");
-
             }
             else
             {
-                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-                SqlConnection conn = new SqlConnection(connStr);
-
-                conn.Open();
-                var sql = String.Format("select * from dbo.allCLubs");
-                SqlCommand allClubs = new SqlCommand(sql, conn);
-                SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
-                while (rdr.Read())
+                try
                 {
-                    string current = rdr.GetString(rdr.GetOrdinal("Name"));
-                    ListItem l = new ListItem(current, current);
-                    ClubList.Items.Add(l);
+                    string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                    SqlConnection conn = new SqlConnection(connStr);
+
+                    conn.Open();
+                    var sql = String.Format("select * from dbo.allCLubs");
+                    SqlCommand allClubs = new SqlCommand(sql, conn);
+                    SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
+                    if (ClubList.Items.Count <= 1)
+                    {
+                        while (rdr.Read())
+                        {
+                            string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                            ListItem l = new ListItem(current, current);
+                            ClubList.Items.Add(l);
+                        }
+                    }
+      
+                    conn.Close();
                 }
-                conn.Close();
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('Couldn't get available clubs')</script>");
+                }
             }
         }
 
@@ -43,11 +52,24 @@ namespace M3
         {
             try
             {
+                deletecHelper(sender,  e);
+            }
+            catch (Exception exception)
+            {
+                Response.Write("<script>alert('" + exception.Message + "')</script>");
+            }
+        }
+
+        protected void deletecHelper(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ClubList.SelectedValue) || ClubList.SelectedValue.Equals("Select Club"))
+                throw new Exception("all fields are required");
+            try
+            {
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-            String cName = ClubList.SelectedValue;
-
+                String cName = ClubList.SelectedValue;
 
                 SqlCommand deleteClubProcedure = new SqlCommand("deleteClub", conn);
                 deleteClubProcedure.CommandType = CommandType.StoredProcedure;
@@ -58,11 +80,11 @@ namespace M3
                 deleteClubProcedure.ExecuteNonQuery();
                 conn.Close();
 
-                Response.Redirect("SystemAdmin.aspx");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('deleted sucessfully');window.location ='SystemAdmin.aspx';", true);
             }
             catch (Exception exception)
             {
-                Response.Write("<script>alert('please enter valid data')</script>");
+                throw new Exception("deletion failed");
             }
 
         }

@@ -12,10 +12,33 @@ namespace M3
 {
     public partial class Login : System.Web.UI.Page
     {
+        List<string> blockedFans = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["username"] = null;
             Session["isLoggedIn"] = null;
+            try
+            {
+                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+                SqlConnection conn = new SqlConnection(connStr);
+
+                conn.Open();
+                var sql = String.Format("select * from dbo.allFans");
+                SqlCommand allFans = new SqlCommand(sql, conn);
+                SqlDataReader rdr = allFans.ExecuteReader(CommandBehavior.CloseConnection);
+                while (rdr.Read())
+                {
+                    if (!rdr.GetBoolean(rdr.GetOrdinal("Status")))
+                    {
+                        blockedFans.Add(rdr.GetString(rdr.GetOrdinal("username")));
+                    }
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Couldn't get available fans')</script>");
+            }
         }
 
         protected void login(object sender, EventArgs e)
@@ -76,13 +99,20 @@ namespace M3
                 else
                     if (resultF != null)
                 {
-                    Session["username"] = user;
-                    Session["isLoggedIn"] = "Fan";
-                    Response.Redirect("Fan.aspx");
+                    if (blockedFans.Contains(user)
+                    {
+                        Response.Write("<script>alert('fan is blocked')</script>");
+                    }
+                    else
+                    {
+                        Session["username"] = user;
+                        Session["isLoggedIn"] = "Fan";
+                        Response.Redirect("Fan.aspx");
+                    }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Username or password incorrect or doesnt exist')</script>");
+                    Response.Write("<script>alert('Username or password incorrect')</script>");
                 }
                 conn.Close();
             }
