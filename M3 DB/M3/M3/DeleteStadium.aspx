@@ -8,12 +8,13 @@
                 Delete Stadium
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3">
-                    <asp:TextBox ID="stadname" runat="server" class="form-control" placeholder="Name"></asp:TextBox>
-                    <label for="stadname">Name</label>
+                <div class="dropdown show mb-3">
+                    <asp:DropDownList ID="StadiumList" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="">Select Stadium</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
                 <div>
-                    <asp:Button ID="deletes" runat="server" CssClass="btn btn-danger" OnClick="sname_Click" Text="Delete" />
+                    <asp:Button ID="deletes" runat="server" CssClass="btn btn-outline-danger" OnClick="sname_Click" Text="Delete" />
                 </div>
             </div>
         </div>

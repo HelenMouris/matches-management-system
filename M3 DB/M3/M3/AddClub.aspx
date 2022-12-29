@@ -16,7 +16,7 @@
                     <label for="clocation">Location</label>
                 </div>
                 <div>
-                    <asp:Button ID="AddsClub" runat="server" CssClass="btn btn-success" OnClick="AddsClub_Click" Text="Add" />
+                    <asp:Button ID="AddsClub" runat="server" CssClass="btn btn-outline-success" OnClick="AddsClub_Click" Text="Add" />
                 </div>
             </div>
         </div>

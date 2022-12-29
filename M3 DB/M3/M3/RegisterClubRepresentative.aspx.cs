@@ -16,7 +16,21 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
 
+            conn.Open();
+            var sql = String.Format("select * from dbo.allCLubs");
+            SqlCommand allClubs = new SqlCommand(sql, conn);
+            SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
+            while (rdr.Read())
+            {
+                string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                ListItem l = new ListItem(current, current);
+                ClubList.Items.Add(l);
+            }
+            conn.Close();
         }
 
 
@@ -28,7 +42,7 @@ namespace M3
             String cname = name.Text;
             String cusername = username.Text;
             String cpassword = password.Text;
-            String club = clubname.Text;
+            String club = ClubList.SelectedValue;
 
             SqlCommand addRepresentativeProcedure = new SqlCommand("addRepresentative", conn);
             addRepresentativeProcedure.CommandType = CommandType.StoredProcedure;

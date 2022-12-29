@@ -16,7 +16,20 @@ namespace M3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
+            SqlConnection conn = new SqlConnection(connStr);
 
+            conn.Open();
+            var sql = String.Format("select * from dbo.allStadiums");
+            SqlCommand allStadiums = new SqlCommand(sql, conn);
+            SqlDataReader rdr = allStadiums.ExecuteReader(CommandBehavior.CloseConnection);
+            while (rdr.Read())
+            {
+                string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                ListItem l = new ListItem(current, current);
+                StadiumList.Items.Add(l);
+            }
+            conn.Close();
         }
 
         protected void addManager_Click(object sender, EventArgs e)
@@ -27,7 +40,7 @@ namespace M3
             String sname = name.Text;
             String susername = username.Text;
             String spassword = password.Text;
-            String stadiumname = stadium.Text;
+            String stadiumname = StadiumList.SelectedValue;
 
 
             SqlCommand addStadiumManagerProcedure = new SqlCommand("addStadiumManager", conn);

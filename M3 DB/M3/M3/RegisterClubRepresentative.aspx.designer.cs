@@ -42,13 +42,13 @@ namespace M3
         protected global::System.Web.UI.WebControls.TextBox password;
 
         /// <summary>
-        /// clubname control.
+        /// ClubList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clubname;
+        protected global::System.Web.UI.WebControls.DropDownList ClubList;
 
         /// <summary>
         /// addclubrepresentative control.
