@@ -12,31 +12,8 @@ namespace M3
 {
     public partial class RegisterFan : System.Web.UI.Page
     {
-        List<string> users = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
-                SqlConnection conn = new SqlConnection(connStr);
-
-                conn.Open();
-                var sql = String.Format("select * from dbo.SystemUser");
-                SqlCommand allUsers = new SqlCommand(sql, conn);
-                SqlDataReader rdr = allUsers.ExecuteReader(CommandBehavior.CloseConnection);
-                if (users.Count < 1)
-                {
-                    while (rdr.Read())
-                    {
-                        users.Add(rdr.GetString(rdr.GetOrdinal("username")));
-                    }
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Couldn't get available stadiums')</script>");
-            }
         }
 
         protected void addFanClick(object sender, EventArgs e)
@@ -65,8 +42,9 @@ namespace M3
             if (name.Text.Length > 20 || username.Text.Length > 20 || password.Text.Length > 20 || nationalId.Text.Length > 20 || phone.Text.Length > 20 || address.Text.Length > 20)
                 throw new Exception("maximum string length is 20");
 
-            if (users.Contains(username.Text))
-                throw new Exception("username already exists");
+            if (DateTime.Parse(birthDate.Text) > DateTime.Now)
+                throw new Exception("invalid birthdate");
+
             try
             {
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
@@ -103,7 +81,7 @@ namespace M3
             }
             catch (Exception exception)
             {
-                throw new Exception("registration failed");
+                throw new Exception("registration failed, username might be unavailable");
             }
         }
     }

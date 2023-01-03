@@ -31,12 +31,15 @@ namespace M3
                     var sql = String.Format("select * from dbo.allCLubs");
                     SqlCommand allClubs = new SqlCommand(sql, conn);
                     SqlDataReader rdr = allClubs.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (rdr.Read())
+                    if (HostClubList.Items.Count <= 1)
                     {
-                        string current = rdr.GetString(rdr.GetOrdinal("Name"));
-                        ListItem l = new ListItem(current, current);
-                        HostClubList.Items.Add(l);
-                        GuestClubList.Items.Add(l);
+                        while (rdr.Read())
+                        {
+                            string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                            ListItem l = new ListItem(current, current);
+                            HostClubList.Items.Add(l);
+                            GuestClubList.Items.Add(l);
+                        }
                     }
                     conn.Close();
                     conn.Open();

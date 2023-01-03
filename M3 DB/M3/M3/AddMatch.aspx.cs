@@ -73,6 +73,11 @@ namespace M3
                 throw new Exception("Invalid dates");
             }
 
+            if ((HostClubList.SelectedValue).Equals(GuestClubList.SelectedValue))
+            {
+                throw new Exception("Invalid data");
+            }
+
             try
             {
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();

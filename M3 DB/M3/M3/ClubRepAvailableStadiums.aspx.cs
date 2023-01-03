@@ -24,12 +24,11 @@ namespace M3
 
         protected void searchStadiums(object sender, EventArgs e)
         {
-            try
-            {
+
                 string connStr = WebConfigurationManager.ConnectionStrings["m2"].ToString();
                 SqlConnection conn = new SqlConnection(connStr);
 
-                string startDate = date.Text;
+                DateTime startDate = DateTime.Parse(date.Text);
 
                 conn.Open();
                 var sql = String.Format("select * from viewAvailableStadiumsOn(@datetime)");
@@ -39,11 +38,7 @@ namespace M3
                 GridView1.DataSource = rdr;
                 GridView1.DataBind();
                 conn.Close();
-            }
-            catch (Exception exception)
-            {
-                Response.Write("<script>alert('please enter valid data')</script>");
-            }
+
 
         }
     }

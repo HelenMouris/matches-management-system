@@ -39,11 +39,14 @@ namespace M3
                     var sql = String.Format("select * from dbo.allStadiums");
                     SqlCommand allStadiums = new SqlCommand(sql, conn);
                     SqlDataReader rdr = allStadiums.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (rdr.Read())
+                    if (StadiumList.Items.Count <= 1)
                     {
-                        string current = rdr.GetString(rdr.GetOrdinal("Name"));
-                        ListItem l = new ListItem(current, current);
-                        StadiumList.Items.Add(l);
+                        while (rdr.Read())
+                        {
+                            string current = rdr.GetString(rdr.GetOrdinal("Name"));
+                            ListItem l = new ListItem(current, current);
+                            StadiumList.Items.Add(l);
+                        }
                     }
                     conn.Close();
                 }
